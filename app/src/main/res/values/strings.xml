@@ -1,0 +1,151 @@
+<resources>
+    <string name="app_name">Gigs</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_rpassword">Repeat password</string>
+
+    <string name="spin_country_prompt">Country</string>
+    <string name="spin_state_prompt">State</string>
+    <string name="text_register">Register</string>
+    <string name="title_register">Register</string>
+    <string name="title_login">Login</string>
+    <string name="font_regular">NotoSans_Regular</string>
+    <string name="font_bold">NotoSans_Bold</string>
+    <string name="err_msg_name">Enter Name</string>
+    <string name="err_msg_email">Enter the vaild email address</string>
+    <string name="err_msg_password">Enter password</string>
+    <string name="err_msg_uname">Enter username</string>
+    <string name="err_msg_rpassword">Enter repeat password</string>
+    <string name="err_msg_cpassword">Enter correct password</string>
+    <string name="text_agree">By signing up, I agree to The Gigs</string>
+    <string name="text_agree_conditions">Terms of conditions</string>
+    <string name="err_msg_country">Please select the country</string>
+    <string name="err_msg_state">Please select the state</string>
+    <string name="text_login">Login</string>
+
+    <string name="signup_info">Not a member yet? it’s fun and easy!</string>
+    <string name="fpassword_info">Do you know your password? it’s fun and easy!</string>
+    <string name="fpassword_login">Login now</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="signup_register_now">Register now</string>
+    <string name="text_forgot_password">Forgot password?</string>
+    <string name="hint_username_email">Username / Email</string>
+    <string name="text_already_login_info">Already a member?</string>
+    <string name="text_already_login">Login</string>
+    <string name="text_submit">Submit</string>
+    <string name="title_forgot_password">Forgot password</string>
+    <string name="err_internet_connection">Please enable your internet.</string>
+    <string name="bottom_menu_home">Home</string>
+    <string name="bottom_menu_sell">Sell</string>
+    <string name="bottom_menu_buy">Buy</string>
+    <string name="bottom_menu_settings">Settings</string>
+    <string name="bottom_menu_chat">Chat</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_home">Home</string>
+    <string name="title_sell">Sell</string>
+    <string name="title_buy">Buy</string>
+    <string name="title_chat">Chat</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_change_password">Change Password</string>
+    <string name="hint_cpassword">Current Password</string>
+    <string name="hint_npassword">New Password</string>
+    <string name="err_msg_npassword">Enter new password</string>
+    <string name="err_msg_cupassword">Enter old password</string>
+    <string name="title_paypal_settings">Paypal Settings</string>
+    <string name="text_top_categories">Top Category</string>
+    <string name="text_more">More</string>
+    <string name="text_popular_gigs">Popular Gigs</string>
+    <string name="text_recent_popular_gigs">Recent Gigs</string>
+    <string name="hint_phone_number">Phone number</string>
+    <string name="hint_zip_code">Zip code</string>
+    <string name="hint_city">City</string>
+    <string name="hint_address_line">Address Line</string>
+    <string name="hint_suggestion_about_you">Suggestion about you</string>
+    <string name="title_update_profile">Update Profile</string>
+    <string name="title_category">Categories</string>
+    <string name="title_all_gigs">Gigs</string>
+    <string name="text_order_now">Order Now</string>
+    <string name="gigs_description">Description</string>
+    <string name="user_info">User Information</string>
+    <string name="total_views">Total Views</string>
+    <string name="txt_country">Country</string>
+    <string name="txt_gigs_user_count">User count</string>
+    <string name="txt_speaks">Speaks</string>
+    <string name="text_recommended_gigs">Recommended Gigs</string>
+    <string name="hint_title_gigs">Title for your Gig*</string>
+    <string name="hint_deliver_gigs">When will you deliver the Gig?*</string>
+    <string name="hint_desc">Provide more details about your gig*</string>
+    <string name="hint_requirement">What do you need from the Buyer to get started</string>
+    <string name="hint_gig_cost">Cost of the Gigs*</string>
+    <string name="hint_extras">I can</string>
+    <string name="hint_cost">$</string>
+    <string name="hint_day">day</string>
+    <string name="txt_add_more_items"><u>Add more items</u></string>
+    <string name="txt_earn_money">Earn extra money - offer optional add-on services to the Buyer</string>
+    <string name="txt_super_fast_delivery">Super fast Delivery</string>
+    <string name="text_create_gigs">Create Gigs</string>
+    <string name="err_extras_isempty">Enter extras name</string>
+    <string name="err_extrascost_isempty">Enter extras cost</string>
+    <string name="err_extrasday_isempty">Enter extras delivery day</string>
+    <string name="err_gigs_title">Enter gigs title</string>
+    <string name="err_gigs_delivery_day">Enter delivery day</string>
+    <string name="err_gigs_costs">Enter gigs cost</string>
+    <string name="err_gigs_desc">Enter gigs description</string>
+    <string name="err_gigs_require">Enter gigs requirement</string>
+    <string name="txt_extras">Extras</string>
+    <string name="txt_terms_conditions">I accept terms and conditions fo gigs portal</string>
+    <string name="title_favourite">Favourites</string>
+    <string name="title_last_visited_gigs">Last Visited Gigs</string>
+    <string name="no_fav_item_found">No more favourites item found.</string>
+    <string name="intro_screen_one_txt">Showcase your works</string>
+    <string name="intro_screen_one_desc">It\'s your destination and find out more opportunities for your job</string>
+    <string name="intro_screen_two_txt">get Rewarded</string>
+    <string name="intro_screen_two_desc">Earn cash for your work and improve your business</string>
+    <string name="title_edit_gigs">Edit Gigs</string>
+    <string name="text_edit_gigs">Edit Gigs</string>
+    <string name="title_activity">Activity</string>
+    <string name="hint_reason">Reason</string>
+    <string name="hint_paypal_email">Paypal Email ID</string>
+    <string name="text_update">Update</string>
+    <string name="hint_feedback">Enter your comments</string>
+    <string name="text_similar_gigs">Similar Gigs</string>
+    <string name="text_extras_gigs">Extras</string>
+    <string name="text_review_gigs">Reviews</string>
+    <string name="demo">Thankfully, Dreamguys technology can change your business. Our web designing,web devlopment,mobile apps technology bring your dream comes true.It is one of four rhetorical modes (also known as modes of discourse), along with exposition, argumentation, and narration.</string>
+    <string name="contact">Contact</string>
+    <string name="editGigs">Edit Gigs</string>
+    <string name="no_data_found">No data found</string>
+    <string name="title_cart">Cart</string>
+    <string name="text_buy_now">Buy now</string>
+    <string name="com_stripe_publishable_key">pk_test_1cGC9JfAkF6GhaegLd2XI2xl</string>
+    <string-array name="settings_data">
+        <item>Change password</item>
+        <item>Edit Profile</item>
+        <item>Paypal Settings</item>
+        <item>FAQs</item>
+        <item>About</item>
+        <item>Logout</item>
+    </string-array>
+
+
+    <string-array name="order_status">
+        <item>Pending</item>
+        <item>Processing</item>
+        <item>Completed</item>
+        <item>Declined</item>
+    </string-array>
+
+
+</resources>

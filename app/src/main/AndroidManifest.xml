@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="dreamguys.in.co.gigs">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_app_icons"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Splashscreen"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Introscreen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Register"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Login"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ForgotPassword"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChangePassword"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UpdateProfile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CategoryList"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GigsLists"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PaypalSettings"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SubCategoryList"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DetailGigs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Favourites"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditGigs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LastVisitedGigs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DetailGigsUserInformation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChatRoomActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver android:name=".receiver.NetworkChangeReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".ChatHistoryActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".payment.PaypalAct"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".services.NotificationExtenderBareBonesExample"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+            <intent-filter>
+                <action android:name="com.onesignal.NotificationExtender" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.paypal.android.sdk.payments.PayPalService"
+            android:exported="false" />
+
+        <activity android:name="com.paypal.android.sdk.payments.PaymentActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.LoginActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PaymentMethodActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PaymentConfirmActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.PayPalFuturePaymentActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.FuturePaymentConsentActivity" />
+        <activity android:name="com.paypal.android.sdk.payments.FuturePaymentInfoActivity" />
+        <activity
+            android:name="io.card.payment.CardIOActivity"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="io.card.payment.DataEntryActivity" />
+
+        <!-- <meta-data
+             android:name="com.onesignal.BadgeCount"
+             android:value="DISABLE" />-->
+
+        <activity
+            android:name=".CartModule"
+            android:theme="@style/AppTheme.NoActionBar" />m
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="88c3fd0dcf2d1245a48a9b07c59e6dd2f5b6770e" />
+
+        <activity
+            android:name=".payment.StripePay"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.onesignal.NotificationOpened.DEFAULT"
+            android:value="DISABLE" />
+
+    </application>
+
+</manifest>

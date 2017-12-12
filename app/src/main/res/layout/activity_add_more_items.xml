@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_extras"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <dreamguys.in.co.gigs.utils.CustomEditext
+                android:id="@+id/input_sub_extras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_extras"
+                android:singleLine="true"
+                android:textSize="@dimen/_12sdp"
+                app:fontName="@string/font_regular" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_sub_extras_cost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <dreamguys.in.co.gigs.utils.CustomEditext
+                android:id="@+id/input_sub_extras_cost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_cost"
+                android:singleLine="true"
+                android:inputType="number"
+                android:textSize="@dimen/_12sdp"
+                app:fontName="@string/font_regular" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_extras_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <dreamguys.in.co.gigs.utils.CustomEditext
+                android:id="@+id/input_sub_extras_day"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_day"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textSize="@dimen/_12sdp"
+                app:fontName="@string/font_regular" />
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/iv_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/_10sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_done_light_green_500_24dp" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:padding="@dimen/_10sdp"
+            android:visibility="gone"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_close_red_800_24dp" />
+
+</LinearLayout>

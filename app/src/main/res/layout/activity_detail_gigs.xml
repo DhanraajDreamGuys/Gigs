@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorAppTheme"
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp">
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:id="@+id/tv_gigs_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:singleLine="true"
+                android:text="@string/title_login"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_16sdp"
+                app:fontName="@string/font_bold" />
+
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="blocksDescendants"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_gigs_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY" />
+
+                <ImageView
+                    android:id="@+id/AD_iv_fav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:src="@drawable/ic_favorite_border_purple_24dp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+
+                <ImageView
+                    android:id="@+id/iv_profile_image"
+                    android:layout_width="@dimen/_48sdp"
+                    android:layout_height="@dimen/_48sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_app_icons" />
+
+                <LinearLayout
+                    android:id="@+id/ll_gigs_user_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <dreamguys.in.co.gigs.utils.CustomTextView
+                        android:id="@+id/tv_gigs_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text="ContactName"
+                        app:fontName="@string/font_bold" />
+
+                    <dreamguys.in.co.gigs.utils.CustomTextView
+                        android:id="@+id/tv_gigs_profession"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:text=""
+                        android:textSize="@dimen/_12sdp"
+                        app:fontName="@string/font_regular" />
+
+                    <RatingBar
+                        android:id="@+id/rating_gigs"
+                        style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp" />
+
+                </LinearLayout>
+
+                <dreamguys.in.co.gigs.utils.CustomButton
+                    android:id="@+id/btn_order_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/button_rectangular_shape"
+                    android:gravity="center"
+                    android:onClick="goToBuy"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Order now"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_10sdp"
+                    app:fontName="@string/font_bold" />
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/colorGrey100"
+                android:padding="@dimen/_10sdp">
+
+                <dreamguys.in.co.gigs.utils.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/gigs_description"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontName="@string/font_bold" />
+            </RelativeLayout>
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:id="@+id/tv_gigs_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:text="@string/demo"
+                android:textSize="@dimen/_12sdp"
+                app:fontName="@string/font_regular" />
+
+            <ImageView
+                android:id="@+id/input_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_down_arrow"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/input_hide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/up_arrow"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@color/colorGrey100"
+                android:padding="@dimen/_10sdp">
+
+                <dreamguys.in.co.gigs.utils.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/user_info"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontName="@string/font_bold" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_gigs_total_views"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <dreamguys.in.co.gigs.utils.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:text="@string/total_views"
+                        android:textSize="@dimen/_10sdp"
+                        app:fontName="@string/font_bold" />
+
+                    <dreamguys.in.co.gigs.utils.CustomTextView
+                        android:id="@+id/gigs_nos_views"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="@dimen/_10sdp"
+                        app:fontName="@string/font_regular" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_gigs_user_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <dreamguys.in.co.gigs.utils.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:text="@string/txt_country"
+                        android:textSize="@dimen/_10sdp"
+                        app:fontName="@string/font_bold" />
+
+                    <dreamguys.in.co.gigs.utils.CustomTextView
+                        android:id="@+id/country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="@dimen/_10sdp"
+                        app:fontName="@string/font_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_gigs_user_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <dreamguys.in.co.gigs.utils.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:text="@string/txt_gigs_user_count"
+                        android:textSize="@dimen/_10sdp"
+                        app:fontName="@string/font_bold" />
+
+                    <dreamguys.in.co.gigs.utils.CustomTextView
+                        android:id="@+id/gigs_user_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="@dimen/_10sdp"
+                        app:fontName="@string/font_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_gigs_user_speaks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <dreamguys.in.co.gigs.utils.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:text="@string/txt_speaks"
+                        android:textSize="@dimen/_10sdp"
+                        app:fontName="@string/font_bold" />
+
+                    <dreamguys.in.co.gigs.utils.CustomTextView
+                        android:id="@+id/tv_user_speaks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textSize="@dimen/_10sdp"
+                        app:fontName="@string/font_regular" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_extras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_gigs_extras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@color/colorGrey100"
+                android:padding="@dimen/_10sdp">
+
+                <dreamguys.in.co.gigs.utils.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/text_extras_gigs"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontName="@string/font_bold" />
+
+                <dreamguys.in.co.gigs.utils.CustomTextView
+                    android:id="@+id/tv_recent_review_gigs_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@drawable/category_purple_button_bg_soild"
+                    android:ems="3"
+                    android:gravity="center"
+                    android:padding="@dimen/_2sdp"
+                    android:text="@string/text_more"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility="gone"
+                    app:fontName="@string/font_regular" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_gigs_extras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="vertical" />
+
+            <LinearLayout
+                android:id="@+id/ll_gigs_superfast_extras"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/superfastdesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:button="@drawable/custom_checkbox_drawables"
+                    android:padding="@dimen/_5sdp"
+                    android:singleLine="true"
+                    android:text="I wil complete in 2 days"
+                    android:textSize="@dimen/_10sdp" />
+
+                <dreamguys.in.co.gigs.utils.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/category_red_button_bg_solid"
+                    android:gravity="center"
+                    android:padding="@dimen/_5sdp"
+                    android:text="Super Fast"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_8sdp"
+                    app:fontName="@string/font_regular" />
+
+                <dreamguys.in.co.gigs.utils.CustomTextView
+                    android:id="@+id/superfastcost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="$1 for 1 day"
+                    android:textSize="@dimen/_10sdp"
+                    app:fontName="@string/font_regular" />
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_reviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@color/colorGrey100"
+                android:padding="@dimen/_10sdp">
+
+                <dreamguys.in.co.gigs.utils.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/text_review_gigs"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontName="@string/font_bold" />
+
+                <dreamguys.in.co.gigs.utils.CustomTextView
+                    android:id="@+id/tv_review_gigs_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@drawable/category_purple_button_bg_soild"
+                    android:ems="3"
+                    android:gravity="center"
+                    android:padding="@dimen/_2sdp"
+                    android:text="@string/text_more"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_10sdp"
+                    app:fontName="@string/font_regular" />
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/lv_review_gigs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+            <RelativeLayout
+                android:id="@+id/rl_similar_gigs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:background="@color/colorGrey100"
+                android:padding="@dimen/_10sdp">
+
+                <dreamguys.in.co.gigs.utils.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/text_similar_gigs"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontName="@string/font_bold" />
+
+                <dreamguys.in.co.gigs.utils.CustomTextView
+                    android:id="@+id/tv_recent_gigs_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:background="@drawable/category_purple_button_bg_soild"
+                    android:ems="3"
+                    android:gravity="center"
+                    android:padding="@dimen/_2sdp"
+                    android:text="@string/text_more"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_10sdp"
+                    app:fontName="@string/font_regular" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/horizontal_recent_popular_gigs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_5sdp" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

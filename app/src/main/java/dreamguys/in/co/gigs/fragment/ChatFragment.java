@@ -1,0 +1,169 @@
+package dreamguys.in.co.gigs.fragment;
+
+import android.content.Context;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import dreamguys.in.co.gigs.Model.POSTMessages;
+import dreamguys.in.co.gigs.R;
+import dreamguys.in.co.gigs.adapter.MessageChatAdapter;
+import dreamguys.in.co.gigs.network.ApiClient;
+import dreamguys.in.co.gigs.network.ApiInterface;
+import dreamguys.in.co.gigs.receiver.NetworkChangeReceiver;
+import dreamguys.in.co.gigs.utils.Constants;
+import dreamguys.in.co.gigs.utils.CustomProgressDialog;
+import dreamguys.in.co.gigs.utils.SessionHandler;
+import dreamguys.in.co.gigs.utils.Utils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link ChatFragment.OnFragmentInteractionListener} interfaces
+ * to handle interaction events.
+ * Use the {@link ChatFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class ChatFragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+    private View mChatLayout;
+
+
+    private OnFragmentInteractionListener mListener;
+
+    RecyclerView recyclerChatList;
+    MessageChatAdapter aMessageChatAdapter;
+    CustomProgressDialog mCustomProgressDialog;
+
+
+    public ChatFragment() {
+        // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment ChatFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static ChatFragment newInstance(String param1, String param2) {
+        ChatFragment fragment = new ChatFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+        mChatLayout = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        recyclerChatList = (RecyclerView) mChatLayout.findViewById(R.id.rv_message_chat_list);
+        mCustomProgressDialog = new CustomProgressDialog(getActivity());
+        if (NetworkChangeReceiver.isConnected()) {
+            mCustomProgressDialog.showDialog();
+            if (SessionHandler.getInstance().get(getActivity(), Constants.USER_ID) != null) {
+                ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+                apiInterface.postmessages(SessionHandler.getInstance().get(getActivity(), Constants.USER_ID)
+                ).enqueue(new Callback<POSTMessages>() {
+                    @Override
+                    public void onResponse(Call<POSTMessages> call, Response<POSTMessages> response) {
+                        if (response.body() != null)
+                            if (response.body().getCode().equals(200)) {
+                                aMessageChatAdapter = new MessageChatAdapter(getActivity(), response.body().getData().getDetails());
+                                LinearLayoutManager horizontalLayoutManagaer
+                                        = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                                recyclerChatList.setHasFixedSize(true);
+                                recyclerChatList.setLayoutManager(horizontalLayoutManagaer);
+                                recyclerChatList.setAdapter(aMessageChatAdapter);
+                            } else {
+                                Utils.toastMessage(getActivity(), getString(R.string.no_data_found));
+                            }
+                        mCustomProgressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<POSTMessages> call, Throwable t) {
+                        Log.i("TAG", t.getMessage());
+                        mCustomProgressDialog.dismiss();
+                    }
+                });
+            }
+
+
+        } else {
+            Utils.toastMessage(getActivity(), getString(R.string.err_internet_connection));
+        }
+
+
+        return mChatLayout;
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interfaces must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+}

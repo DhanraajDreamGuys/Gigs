@@ -1,0 +1,140 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="dreamguys.in.co.gigs.fragment.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_popular_gigs"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_120sdp"
+            android:layout_margin="@dimen/_10sdp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGrey100"
+            android:padding="@dimen/_10sdp">
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/text_top_categories"
+                android:textSize="@dimen/_12sdp"
+                app:fontName="@string/font_bold" />
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:id="@+id/tv_category_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:background="@drawable/category_purple_button_bg_soild"
+                android:ems="3"
+                android:gravity="center"
+                android:padding="@dimen/_2sdp"
+                android:text="@string/text_more"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_10sdp"
+                app:fontName="@string/font_regular" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/horizontal_categories"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGrey100"
+            android:padding="@dimen/_10sdp">
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/text_popular_gigs"
+                android:textSize="@dimen/_12sdp"
+                app:fontName="@string/font_bold" />
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:id="@+id/tv_popular_gigs_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:background="@drawable/category_purple_button_bg_soild"
+                android:ems="3"
+                android:gravity="center"
+                android:padding="@dimen/_2sdp"
+                android:text="@string/text_more"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_10sdp"
+                app:fontName="@string/font_regular" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/horizontal_popular_gigs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGrey100"
+            android:padding="@dimen/_10sdp">
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/text_recent_popular_gigs"
+                android:textSize="@dimen/_12sdp"
+                app:fontName="@string/font_bold" />
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:id="@+id/tv_recent_gigs_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:background="@drawable/category_purple_button_bg_soild"
+                android:ems="3"
+                android:gravity="center"
+                android:padding="@dimen/_2sdp"
+                android:text="@string/text_more"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_10sdp"
+                app:fontName="@string/font_regular" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/horizontal_recent_popular_gigs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_5sdp" />
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

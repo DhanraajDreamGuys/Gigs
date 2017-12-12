@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:minHeight="@dimen/_200sdp"
+    android:minWidth="@dimen/_500sdp"
+    android:orientation="vertical">
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:id="@+id/tv_reason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="37dp"
+        android:gravity="center"
+        android:text="Reason"
+        android:textSize="@dimen/_14sdp"
+        app:fontName="@string/font_regular" />
+
+
+    <dreamguys.in.co.gigs.utils.CustomButton
+        android:id="@+id/btn_accept_status"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@drawable/button_rectangular_shape"
+        android:ems="5"
+        android:text="Accept"
+        android:textColor="@android:color/white"
+        app:fontName="@string/font_regular" />
+
+</LinearLayout>

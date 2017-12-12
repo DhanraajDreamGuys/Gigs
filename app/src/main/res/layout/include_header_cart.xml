@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="@dimen/_10sdp">
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        app:fontName="@string/font_bold"
+        android:textSize="@dimen/_12sdp"
+        android:text="Item" />
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        app:fontName="@string/font_bold"
+        android:textSize="@dimen/_12sdp"
+        android:text="Product Name" />
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        app:fontName="@string/font_bold"
+        android:textSize="@dimen/_12sdp"
+        android:gravity="center"
+        android:text="Quantity" />
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        app:fontName="@string/font_bold"
+        android:textSize="@dimen/_12sdp"
+        android:gravity="center"
+        android:text="Total" />
+
+</LinearLayout>

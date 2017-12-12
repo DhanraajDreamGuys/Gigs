@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/_5sdp">
+
+
+    <FrameLayout
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_gravity="center"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/iv_gigs_images"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop" />
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:id="@+id/tv_gigs_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:background="@color/colorAppTheme"
+            android:padding="@dimen/_5sdp"
+            android:text="$1"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_12sdp"
+            app:fontName="@string/font_bold" />
+
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:id="@+id/tv_gigs_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="@dimen/_12sdp"
+            app:fontName="@string/font_bold" />
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:id="@+id/author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text=""
+            android:textSize="@dimen/_10sdp"
+            app:fontName="@string/font_regular" />
+
+        <RatingBar
+            android:id="@+id/rating_gigs"
+            style="@style/Base.Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:id="@+id/rating_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_5sdp"
+            android:singleLine="true"
+            android:text="(20)"
+            android:textSize="@dimen/_10sdp"
+            app:fontName="@string/font_regular" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_location_on_grey_24dp" />
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:id="@+id/tv_loc"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:singleLine="true"
+                android:textSize="@dimen/_8sdp"
+                app:fontName="@string/font_regular" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_fav_gigs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_10sdp"
+        android:src="@drawable/ic_favorite_border_purple_24dp"
+        android:visibility="gone" />
+</LinearLayout>
+

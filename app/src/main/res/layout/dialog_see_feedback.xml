@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/_200sdp"
+    android:minWidth="@dimen/_500sdp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/iv_from_prf_image"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/no_image"
+            android:visibility="visible" />
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:id="@+id/from_chat_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_toLeftOf="@+id/from_chat_date"
+            android:layout_toRightOf="@+id/iv_from_prf_image"
+            android:gravity="top"
+            android:text="@string/hint_feedback"
+            android:textColor="@color/colorAppTheme"
+            android:textSize="@dimen/_14sdp"
+            app:fontName="@string/font_bold" />
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:id="@+id/from_chat_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:gravity="top"
+            android:text="11:20AM"
+            android:textSize="@dimen/_8sdp"
+            app:fontName="@string/font_regular" />
+
+    </RelativeLayout>
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:id="@+id/from_chat_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:padding="@dimen/_5sdp"
+        android:text="@string/hint_feedback"
+        app:fontName="@string/font_regular" />
+
+    <RatingBar
+        android:id="@+id/from_rb_comments"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:numStars="5" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:background="@color/colorGrey300" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/iv_to_prf_image"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/no_image"
+            android:visibility="visible" />
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:id="@+id/to_chat_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_toLeftOf="@+id/to_chat_date"
+            android:layout_toRightOf="@+id/iv_to_prf_image"
+            android:gravity="top"
+            android:text="@string/hint_feedback"
+            android:textColor="@color/colorAppTheme"
+            android:textSize="@dimen/_14sdp"
+            app:fontName="@string/font_bold" />
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:id="@+id/to_chat_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:gravity="top"
+            android:text="11:20AM"
+            android:textSize="@dimen/_8sdp"
+            app:fontName="@string/font_regular" />
+
+    </RelativeLayout>
+
+    <dreamguys.in.co.gigs.utils.CustomCheckedTextView
+        android:id="@+id/to_chat_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:gravity="top"
+        android:hint="@string/hint_feedback"
+        android:padding="@dimen/_5sdp" />
+
+
+    <RatingBar
+        android:id="@+id/to_rb_comments"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:numStars="5" />
+
+    <dreamguys.in.co.gigs.utils.CustomButton
+        android:id="@+id/btn_send_feeedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/button_rectangular_shape"
+        android:ems="8"
+        android:text="Send Feedback"
+        android:textColor="@android:color/white"
+        android:visibility="gone" />
+
+</LinearLayout>

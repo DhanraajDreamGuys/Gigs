@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/_16sdp"
+    android:layout_marginRight="@dimen/_16sdp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:src="@drawable/intro_welcome_one" />
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/intro_screen_one_txt"
+        android:textAllCaps="true"
+        android:textColor="@color/colorAppTheme"
+        android:textSize="@dimen/_14sdp"
+        app:fontName="@string/font_bold" />
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/intro_screen_one_desc"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_8sdp"
+        app:fontName="@string/font_regular" />
+
+</LinearLayout>

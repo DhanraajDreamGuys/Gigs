@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <dreamguys.in.co.gigs.utils.CustomGridView
+        android:id="@+id/customGridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:horizontalSpacing="@dimen/_1sdp"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:verticalSpacing="@dimen/_1sdp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"></dreamguys.in.co.gigs.utils.CustomGridView>
+</LinearLayout>

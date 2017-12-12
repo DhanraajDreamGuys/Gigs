@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorAppTheme"
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp">
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/title_update_profile"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_16sdp"
+                app:fontName="@string/font_bold" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_16sdp"
+        android:layout_marginRight="@dimen/_16sdp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <dreamguys.in.co.gigs.utils.CustomEditext
+                    android:id="@+id/input_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_name"
+                    android:singleLine="true"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontName="@string/font_regular" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_phno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <dreamguys.in.co.gigs.utils.CustomEditext
+                    android:id="@+id/input_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_phone_number"
+                    android:inputType="phone"
+                    android:singleLine="true"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontName="@string/font_regular" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_address_line"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <dreamguys.in.co.gigs.utils.CustomEditext
+                    android:id="@+id/input_address_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="@string/hint_address_line"
+                    android:lines="3"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontName="@string/font_regular" />
+            </android.support.design.widget.TextInputLayout>
+
+            <dreamguys.in.co.gigs.utils.MultiSpinner
+                android:id="@+id/spinner_speaks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp" />
+
+            <Spinner
+                android:id="@+id/spinner_counrty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp" />
+
+            <Spinner
+                android:id="@+id/spinner_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <dreamguys.in.co.gigs.utils.CustomEditext
+                    android:id="@+id/input_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_city"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontName="@string/font_regular" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_zip_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <dreamguys.in.co.gigs.utils.CustomEditext
+                    android:id="@+id/input_zip_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_zip_code"
+                    android:singleLine="true"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontName="@string/font_regular" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinner_profession"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp" />
+
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_suggestion_about_you"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <dreamguys.in.co.gigs.utils.CustomEditext
+                    android:id="@+id/input_suggestion_about_you"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="@string/hint_suggestion_about_you"
+                    android:lines="5"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontName="@string/font_regular" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <dreamguys.in.co.gigs.utils.CustomButton
+                android:id="@+id/button_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/button_rectangular_green_shape"
+                android:ems="8"
+                android:gravity="center"
+                android:onClick="upadteProfile"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/text_submit"
+                android:textColor="@android:color/white"
+                app:fontName="@string/font_bold" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_thanks_order"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/thankyoubg"
+    android:gravity="center"
+    android:visibility="gone"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="@dimen/_72sdp"
+        android:layout_height="@dimen/_72sdp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_app_icons" />
+
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/_10sdp"
+        android:text="Thanks you so much"
+        android:textColor="@color/colorAppTheme"
+        android:textSize="@dimen/_18sdp"
+        app:fontName="@string/font_bold" />
+
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:id="@+id/transaction_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="For your order"
+        android:textColor="#a4a4a4"
+        android:textSize="@dimen/_14sdp"
+        app:fontName="@string/font_regular" />
+
+
+    <dreamguys.in.co.gigs.utils.CustomButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_80sdp"
+        android:background="@drawable/custom_thanks_button"
+        android:gravity="center"
+        android:onClick="takeToHome"
+        android:padding="@dimen/_10sdp"
+        android:text="Take me to home"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        app:fontName="@string/font_bold" />
+
+
+</LinearLayout>
+

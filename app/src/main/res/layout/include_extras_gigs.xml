@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:text=""
+        android:textSize="@dimen/_12sdp"
+        android:visibility="invisible"
+        app:fontName="@string/font_regular" />
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:id="@+id/super_fast_extras_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:text=""
+        android:textSize="@dimen/_12sdp"
+        app:fontName="@string/font_regular" />
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:id="@+id/super_fast_extra_quantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        android:gravity="center"
+        android:text=""
+        android:textSize="@dimen/_12sdp"
+        app:fontName="@string/font_regular" />
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:id="@+id/super_fast_extra_cost"
+        app:fontName="@string/font_regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:gravity="center"
+        android:text=""
+        android:textSize="@dimen/_12sdp" />
+</LinearLayout>
+

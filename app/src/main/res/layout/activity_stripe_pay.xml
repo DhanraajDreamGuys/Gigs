@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="dreamguys.in.co.gigs.payment.StripePay">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/_10sdp"
+            android:text="Card Number"
+            app:fontName="@string/font_regular" />
+
+
+        <dreamguys.in.co.gigs.utils.CustomEditext
+            android:id="@+id/cardNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fontName="@string/font_regular"
+            android:layout_weight="0.5"
+            android:text="4242 4242 4242 4242" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/_10sdp"
+            android:text="Card expiry"
+            app:fontName="@string/font_regular" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:orientation="horizontal">
+
+            <dreamguys.in.co.gigs.utils.CustomEditext
+                android:id="@+id/month"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                app:fontName="@string/font_regular"
+                android:inputType="number"
+                android:text="12" />
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="/"
+                app:fontName="@string/font_regular"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <dreamguys.in.co.gigs.utils.CustomEditext
+                android:id="@+id/year"
+                app:fontName="@string/font_regular"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:text="19" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/_10sdp"
+            android:text="CVC"
+            app:fontName="@string/font_regular" />
+
+
+        <dreamguys.in.co.gigs.utils.CustomEditext
+            android:id="@+id/cvc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            app:fontName="@string/font_regular"
+            android:text="123" />
+
+    </LinearLayout>
+
+
+    <dreamguys.in.co.gigs.utils.CustomButton
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/button_rectangular_green_shape"
+        android:onClick="submitCard"
+        android:text="Pay"
+        android:textColor="@android:color/white"
+        app:fontName="@string/font_regular" />
+
+
+</LinearLayout>

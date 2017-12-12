@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical">
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:id="@+id/txt_category_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_3sdp"
+        android:background="@drawable/category_purple_button_bg_soild"
+        android:padding="@dimen/_5sdp"
+        android:gravity="center_vertical"
+        android:text="Top category"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_10sdp"
+        app:fontName="@string/font_bold" />
+
+</LinearLayout>

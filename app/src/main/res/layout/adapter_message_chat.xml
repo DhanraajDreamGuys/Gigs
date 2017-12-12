@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_3sdp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_message_profile_img"
+        android:layout_width="@dimen/_48sdp"
+        android:layout_height="@dimen/_48sdp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/no_image" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.5"
+        android:orientation="vertical">
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:id="@+id/tv_messager_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="VJ"
+            android:textSize="@dimen/_14sdp"
+            app:fontName="@string/font_bold" />
+
+        <dreamguys.in.co.gigs.utils.CustomTextView
+            android:id="@+id/tv_messager_last_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:singleLine="true"
+            android:text="This is my message"
+            android:textSize="@dimen/_12sdp"
+            app:fontName="@string/font_regular" />
+
+    </LinearLayout>
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:id="@+id/tv_messager_last_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:gravity="right"
+        android:singleLine="true"
+        android:text="10:21 AM"
+        android:textSize="@dimen/_10sdp"
+        app:fontName="@string/font_regular" />
+
+
+</LinearLayout>

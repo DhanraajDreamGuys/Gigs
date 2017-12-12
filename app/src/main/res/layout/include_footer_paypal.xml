@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    m
+
+    <dreamguys.in.co.gigs.utils.CustomButton
+        android:id="@+id/button_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/button_rectangular_green_shape"
+        android:ems="8"
+        android:gravity="center"
+        android:onClick="thanksForConfirmation"
+        android:padding="@dimen/_5sdp"
+        android:text="Thank you"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:fontName="@string/font_bold" />
+
+</LinearLayout>
