@@ -37,4 +37,7 @@ public class Constants {
     public static String SUPERFAST_CHARGES = "SUPERFAST_CHARGES";
     public static String SUPERFAST_DAYS = "SUPERFAST_DAYS";
     public static String SUPERFAST_DELIVERY_DESC = "SUPERFAST_DELIVERY_DESC";
+    public static String passwordMatch = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])[^\\s]{8,15}$";
+    public static String cityMatch = "^(?=.*[a-z])(?=.*[A-Z])[^\\s]{8,15}$";
+    public static String numberMatch="^[0-9]+$";
 }

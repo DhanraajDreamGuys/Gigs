@@ -207,7 +207,7 @@ public class HomeFragment extends Fragment {
                                     if (getActivity() != null) {
                                         aPopularGigsImageAdapter = new PopularGigsImageAdapter(getActivity(), primary.getPopular_gigs_image());
                                         mViewPager.setAdapter(aPopularGigsImageAdapter);
-                                        setViewpagerAutoSlide();
+//                                        setViewpagerAutoSlide();
                                         if (primary.getCategories().size() > 0) {
                                             HorizontalTopCategoryAdapter aHorizontalTopCategoryAdapter = new HorizontalTopCategoryAdapter(getActivity(), primary.getCategories());
                                             horizontalCategories.setAdapter(aHorizontalTopCategoryAdapter);

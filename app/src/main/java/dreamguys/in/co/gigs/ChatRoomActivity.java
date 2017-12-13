@@ -240,6 +240,12 @@ public class ChatRoomActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(myBroadcastReceiver);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(myBroadcastReceiver);
@@ -271,8 +277,6 @@ public class ChatRoomActivity extends AppCompatActivity {
                 }
 
             }
-
-
         }
     }
 

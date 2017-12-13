@@ -10,6 +10,7 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorAppTheme"
@@ -69,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_phone_number"
-                    android:inputType="phone"
+                    android:inputType="textPhonetic"
                     android:singleLine="true"
                     android:textSize="@dimen/_12sdp"
                     app:fontName="@string/font_regular" />

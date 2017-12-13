@@ -2,8 +2,10 @@ package dreamguys.in.co.gigs;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,7 +74,8 @@ public class UpdateProfile extends AppCompatActivity {
     private CustomProgressDialog mCustomProgressDialog;
     private HashMap<String, String> getProfiles = new HashMap<String, String>();
     private int VIEW_TYPE = 0;
-
+    private Toolbar tb_toolbar;
+    private TextInputLayout inputLayoutPhone, inputLayoutCity, inputLayoutZipcode;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,6 +83,8 @@ public class UpdateProfile extends AppCompatActivity {
         setContentView(R.layout.activity_update_profile);
         gson = new Gson();
         mCustomProgressDialog = new CustomProgressDialog(this);
+
+
         initLayouts();
 
 
@@ -176,9 +181,8 @@ public class UpdateProfile extends AppCompatActivity {
                     for (int i = 0; i < selected.length; i++) {
                         if (selected[i]) {
                             languages = sb.append(addlanguageLists.get(i)).append(",").toString();
-                            Log.i("Selected---->", languages);
                         } else {
-
+                            languages = "";
                         }
                     }
                 }
@@ -195,6 +199,7 @@ public class UpdateProfile extends AppCompatActivity {
             public void onResponse(Call<POSTViewProfile> call, Response<POSTViewProfile> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode().equals(200)) {
+                        mCustomProgressDialog.dismiss();
                         editPhone.setText(response.body().getData().get(0).getContact());
                         editAddress.setText(response.body().getData().get(0).getAddress());
                         editSuggestions.setText(response.body().getData().get(0).getDescription());
@@ -216,26 +221,32 @@ public class UpdateProfile extends AppCompatActivity {
 
 //                        spinState.setSelection(Integer.parseInt(response.body().getData().get(0).getState()));
 
-                        final StringBuilder spinnerBuffer = new StringBuilder();
-                        String data = response.body().getData().get(0).getLang_speaks();
-                        String[] items = data.split(",");
-                        for (String item : items) {
-                            spinnerBuffer.append(item);
-                            spinnerBuffer.append(",");
-                        }
-                        languages = spinnerBuffer.toString().trim().substring(0, spinnerBuffer.toString().length() - 1);
-                        spinSpeaks.setUpdateItems(addlanguageLists, spinnerBuffer.toString(), new MultiSpinner.MultiSpinnerListener() {
-                            @Override
-                            public void onItemsSelected(boolean[] selected) {
-                                StringBuilder sb = new StringBuilder();
-                                for (int i = 0; i < selected.length; i++) {
-                                    if (selected[i]) {
-                                        languages = sb.append(addlanguageLists.get(i)).append(",").toString();
-                                        Log.i("Selected---->", languages);
+                        if (response.body().getData().get(0).getLang_speaks().isEmpty()) {
+                            spinSpeaks.setPrompt("Select Languages");
+                        } else {
+                            final StringBuilder spinnerBuffer = new StringBuilder();
+                            String data = response.body().getData().get(0).getLang_speaks();
+                            String[] items = data.split(",");
+                            for (String item : items) {
+                                spinnerBuffer.append(item);
+                                spinnerBuffer.append(",");
+                            }
+                            languages = spinnerBuffer.toString().trim().substring(0, spinnerBuffer.toString().length() - 1);
+                            spinSpeaks.setUpdateItems(addlanguageLists, spinnerBuffer.toString(), new MultiSpinner.MultiSpinnerListener() {
+                                @Override
+                                public void onItemsSelected(boolean[] selected) {
+                                    StringBuilder sb = new StringBuilder();
+                                    for (int i = 0; i < selected.length; i++) {
+                                        if (selected[i]) {
+                                            languages = sb.append(addlanguageLists.get(i)).append(",").toString();
+                                        } else {
+                                            languages = "";
+                                        }
                                     }
                                 }
-                            }
-                        });
+                            });
+                        }
+
 
                         for (int i = 0; i < getProfession.length; i++) {
                             if (getProfession[i].getId().equalsIgnoreCase(
@@ -266,67 +277,79 @@ public class UpdateProfile extends AppCompatActivity {
     }
 
     private void getStateAPI() {
-        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-        apiInterface.getState(country).enqueue(new Callback<List<GETState>>() {
-            @Override
-            public void onResponse(Call<List<GETState>> call, final Response<List<GETState>> response) {
-                if (response.isSuccessful()) {
-                    if (response.body().size() > 0) {
-                        addStateLists.clear();
-                        for (GETState getState : response.body()) {
-                            addStateLists.add(getState.getState_name());
-                        }
-
-                        if (addStateLists.size() > 0 && response.body().size() > 0) {
-                            final ArrayAdapter<String> adapter = new ArrayAdapter<String>(UpdateProfile.this,
-                                    android.R.layout.simple_spinner_item, addStateLists);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            spinState.setAdapter(adapter);
-
-
-                            if (!state_name.isEmpty()) {
-                                for (int i = 0; i < addStateLists.size(); i++) {
-                                    if (state_name.equalsIgnoreCase(addStateLists.get(i))) {
-                                        spinState.setSelection(i);
-                                    }
-
-                                }
+        if (NetworkChangeReceiver.isConnected()) {
+            mCustomProgressDialog.showDialog();
+            ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+            apiInterface.getState(country).enqueue(new Callback<List<GETState>>() {
+                @Override
+                public void onResponse(Call<List<GETState>> call, final Response<List<GETState>> response) {
+                    mCustomProgressDialog.dismiss();
+                    if (response.isSuccessful()) {
+                        if (response.body().size() > 0) {
+                            addStateLists.clear();
+                            for (GETState getState : response.body()) {
+                                addStateLists.add(getState.getState_name());
                             }
 
-                            spinState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    if (addStateLists.get(position).equalsIgnoreCase(response.body().get(position).getState_name())) {
-                                        state = response.body().get(position).getState_id();
+                            if (addStateLists.size() > 0 && response.body().size() > 0) {
+                                final ArrayAdapter<String> adapter = new ArrayAdapter<String>(UpdateProfile.this,
+                                        android.R.layout.simple_spinner_item, addStateLists);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinState.setAdapter(adapter);
+
+
+                                if (!state_name.isEmpty()) {
+                                    for (int i = 0; i < addStateLists.size(); i++) {
+                                        if (state_name.equalsIgnoreCase(addStateLists.get(i))) {
+                                            spinState.setSelection(i);
+                                        }
+
                                     }
                                 }
 
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
+                                spinState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        if (addStateLists.get(position).equalsIgnoreCase(response.body().get(position).getState_name())) {
+                                            state = response.body().get(position).getState_id();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
 
 
-                                }
-                            });
+                                    }
+                                });
+
+
+                            }
 
 
                         }
-
-
                     }
-                }
-            }
 
-            @Override
-            public void onFailure(Call<List<GETState>> call, Throwable t) {
-                Log.i("TAG", t.getMessage());
-            }
-        });
+                }
+
+                @Override
+                public void onFailure(Call<List<GETState>> call, Throwable t) {
+                    Log.i("TAG", t.getMessage());
+                    mCustomProgressDialog.dismiss();
+                }
+            });
+        } else {
+            Toast.makeText(this, getString(R.string.err_internet_connection), Toast.LENGTH_SHORT).show();
+        }
 
 
     }
 
 
     private void initLayouts() {
+
+        tb_toolbar = (Toolbar) findViewById(R.id.tb_toolbar);
+        setSupportActionBar(tb_toolbar);
+
         spinCountry = (Spinner) findViewById(R.id.spinner_counrty);
         spinState = (Spinner) findViewById(R.id.spinner_state);
         spinProfession = (Spinner) findViewById(R.id.spinner_profession);
@@ -338,6 +361,10 @@ public class UpdateProfile extends AppCompatActivity {
         editSuggestions = (EditText) findViewById(R.id.input_suggestion_about_you);
         editZipCode = (EditText) findViewById(R.id.input_zip_code);
         editName = (EditText) findViewById(R.id.input_name);
+
+        inputLayoutPhone = (TextInputLayout) findViewById(R.id.input_layout_phno);
+
+
     }
 
     private String loadJSONFromAsset() {
@@ -362,24 +389,32 @@ public class UpdateProfile extends AppCompatActivity {
     }
 
     public void upadteProfile(View view) {
-        if (NetworkChangeReceiver.isConnected()) {
-            mCustomProgressDialog.showDialog();
-            updateProfiles.put("user_id", SessionHandler.getInstance().get(UpdateProfile.this, Constants.USER_ID));
-            updateProfiles.put("user_contact", editPhone.getText().toString());
-            updateProfiles.put("user_zip", editZipCode.getText().toString());
-            updateProfiles.put("user_city", editCity.getText().toString());
-            updateProfiles.put("user_addr", editAddress.getText().toString());
-            updateProfiles.put("user_desc", editSuggestions.getText().toString());
-            updateProfiles.put("country_id", country);
-            updateProfiles.put("state_id", state);
-            updateProfiles.put("profession", profession);
-            updateProfiles.put("user_name", editName.getText().toString());
-            updateProfiles.put("language_tags", languages);
-            postUpdateProfile();
-        } else {
 
+        if (!editPhone.getText().toString().matches(Constants.numberMatch)) {
+            inputLayoutPhone.setError(getString(R.string.err_msg_phone));
+        } else if (!editCity.getText().toString().matches(Constants.cityMatch)) {
+            inputLayoutCity.setError(getString(R.string.err_msg_city));
+        } else {
+            if (NetworkChangeReceiver.isConnected()) {
+                mCustomProgressDialog.showDialog();
+                updateProfiles.put("user_id", SessionHandler.getInstance().get(UpdateProfile.this, Constants.USER_ID));
+                updateProfiles.put("user_contact", editPhone.getText().toString());
+                updateProfiles.put("user_zip", editZipCode.getText().toString());
+                updateProfiles.put("user_city", editCity.getText().toString());
+                updateProfiles.put("user_addr", editAddress.getText().toString());
+                updateProfiles.put("user_desc", editSuggestions.getText().toString());
+                updateProfiles.put("country_id", country);
+                updateProfiles.put("state_id", state);
+                updateProfiles.put("profession", profession);
+                updateProfiles.put("user_name", editName.getText().toString());
+                updateProfiles.put("language_tags", languages);
+                postUpdateProfile();
+            } else {
+
+            }
         }
     }
+
 
     private void postUpdateProfile() {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);

@@ -68,9 +68,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress"
                     android:singleLine="true"
                     android:textSize="@dimen/_12sdp"
-                    android:inputType="textEmailAddress"
                     app:fontName="@string/font_regular" />
             </android.support.design.widget.TextInputLayout>
 
@@ -116,8 +116,8 @@
                     android:id="@+id/input_rpassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
                     android:hint="@string/hint_rpassword"
+                    android:inputType="textPassword"
                     android:singleLine="true"
                     android:textSize="@dimen/_12sdp"
                     app:fontName="@string/font_regular" />
@@ -138,25 +138,31 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textSize="@dimen/_12sdp" />
 
-
-            <dreamguys.in.co.gigs.utils.CustomTextView
-                app:fontName="@string/font_regular"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:gravity="center"
-                android:text="@string/text_agree"
-                android:textSize="@dimen/_10sdp" />
+                android:layout_marginTop="@dimen/_10sdp">
 
-            <dreamguys.in.co.gigs.utils.CustomTextView
-                app:fontName="@string/font_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/text_agree_conditions"
-                android:onClick="termsOfConditions"
-                android:textColor="@color/colorAppTheme"
-                android:textSize="@dimen/_10sdp" />
+                <CheckBox
+                    android:id="@+id/cb_agree_conditions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="@string/text_agree"
+                    android:textSize="@dimen/_10sdp" />
+
+                <dreamguys.in.co.gigs.utils.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:layout_toRightOf="@+id/cb_agree_conditions"
+                    android:onClick="termsOfConditions"
+                    android:text=" Terms of conditions"
+                    android:textColor="@color/colorAppTheme"
+                    android:textSize="@dimen/_10sdp"
+                    app:fontName="@string/font_bold" />
+            </RelativeLayout>
 
             <dreamguys.in.co.gigs.utils.CustomButton
                 android:id="@+id/button_register"

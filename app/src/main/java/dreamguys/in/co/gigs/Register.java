@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -67,6 +68,8 @@ public class Register extends AppCompatActivity {
     private final HashMap<String, String> registerData = new HashMap<String, String>();
     private CustomProgressDialog mCustomProgressDialog;
     private Toolbar mToolbar;
+    CheckBox mCheckBox;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -178,6 +181,8 @@ public class Register extends AppCompatActivity {
         spinCountry = (Spinner) findViewById(R.id.spinner_counrty);
         spinState = (Spinner) findViewById(R.id.spinner_state);
 
+        mCheckBox = (CheckBox) findViewById(R.id.cb_agree_conditions);
+
     }
 
 
@@ -208,6 +213,10 @@ public class Register extends AppCompatActivity {
             return;
         }
 
+        if (!mCheckBox.isChecked()) {
+            Toast.makeText(this, "Please accept the terms & conditions", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         registerData.put("email", editEmail.getText().toString());
         registerData.put("username", editUserName.getText().toString());
@@ -306,8 +315,24 @@ public class Register extends AppCompatActivity {
             textInputLayoutPassword.setError(getString(R.string.err_msg_password));
             requestFocus(editPassword);
             return false;
+        } else if (editPassword.getText().toString().length() < 8) {
+            textInputLayoutPassword.setError(getString(R.string.err_msg_password_length));
+            requestFocus(editPassword);
+            return false;
+        } else if (!editPassword.getText().toString().matches(Constants.passwordMatch)) {
+            textInputLayoutPassword.setError(getString(R.string.err_password));
+            requestFocus(editPassword);
+            return false;
         } else if (editRPassword.getText().toString().trim().isEmpty()) {
             textInputLayoutRPassword.setError(getString(R.string.err_msg_rpassword));
+            requestFocus(editRPassword);
+            return false;
+        } else if (editRPassword.getText().toString().length() < 8) {
+            textInputLayoutRPassword.setError(getString(R.string.err_msg_password_length));
+            requestFocus(editRPassword);
+            return false;
+        } else if (!editRPassword.getText().toString().matches(Constants.passwordMatch)) {
+            textInputLayoutRPassword.setError(getString(R.string.err_password));
             requestFocus(editRPassword);
             return false;
         } else if (!editPassword.getText().toString().trim().equalsIgnoreCase(editRPassword.getText().toString().trim())) {

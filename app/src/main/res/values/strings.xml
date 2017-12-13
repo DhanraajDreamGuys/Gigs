@@ -19,16 +19,20 @@
     <string name="font_regular">NotoSans_Regular</string>
     <string name="font_bold">NotoSans_Bold</string>
     <string name="err_msg_name">Enter Name</string>
+    <string name="err_msg_phone">Only numbers Allowed</string>
+    <string name="err_msg_city">Should contain only letters</string>
     <string name="err_msg_email">Enter the vaild email address</string>
     <string name="err_msg_password">Enter password</string>
+    <string name="err_msg_password_length">Password should contain minimum 8 characters</string>
     <string name="err_msg_uname">Enter username</string>
     <string name="err_msg_rpassword">Enter repeat password</string>
     <string name="err_msg_cpassword">Enter correct password</string>
     <string name="text_agree">By signing up, I agree to The Gigs</string>
-    <string name="text_agree_conditions">Terms of conditions</string>
+    <string name="text_agree_conditions"> Terms of conditions</string>
     <string name="err_msg_country">Please select the country</string>
     <string name="err_msg_state">Please select the state</string>
     <string name="text_login">Login</string>
+    <string name="err_password">Your password should be 8 characters long, It should be a combination of uppercase,lower case, Number and special character</string>
 
     <string name="signup_info">Not a member yet? it’s fun and easy!</string>
     <string name="fpassword_info">Do you know your password? it’s fun and easy!</string>
