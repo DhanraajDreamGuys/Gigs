@@ -84,7 +84,6 @@ public class UpdateProfile extends AppCompatActivity {
         gson = new Gson();
         mCustomProgressDialog = new CustomProgressDialog(this);
 
-
         initLayouts();
 
 
