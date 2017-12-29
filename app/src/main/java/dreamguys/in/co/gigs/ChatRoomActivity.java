@@ -14,10 +14,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.onesignal.OneSignal;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +49,7 @@ import retrofit2.Response;
 public class ChatRoomActivity extends AppCompatActivity {
 
     public static RecyclerView recyclerViewChatRoom;
-    String user_id = "", chat_id = "", chatter_name = "";
+    String user_id = "", chat_id = "", chatter_name = "", user_image = "";
     static CustomProgressDialog mCustomProgressDialog;
     private HashMap<String, String> postChatDetails = new HashMap<String, String>();
     public static ChatRoomAdapter aChatRoomAdapter;
@@ -59,7 +61,8 @@ public class ChatRoomActivity extends AppCompatActivity {
     String notification = "", message = "";
     String body;
     JSONObject notificationData;
-    private MyBroadcastReceiver myBroadcastReceiver;
+    private BroadcastReceiver myBroadcastReceiver;
+    private ImageView ivImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,15 +70,23 @@ public class ChatRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_room);
         OneSignal.setInFocusDisplaying(OneSignal.OSInFocusDisplayOption.None);
 
+        sendMessage = (EditText) findViewById(R.id.et_send_message);
+        messengerName = (TextView) findViewById(R.id.tv_chat_msger_name);
+        ivImage = (ImageView) findViewById(R.id.input_profile_picture);
         recyclerViewChatRoom = (RecyclerView) findViewById(R.id.rv_chat_room);
         mCustomProgressDialog = new CustomProgressDialog(this);
+
         user_id = getIntent().getStringExtra("user_id");
         chat_id = getIntent().getStringExtra("chat_id");
         chatter_name = getIntent().getStringExtra("chat_name");
-
+        user_image = getIntent().getStringExtra("user_image");
         notification = getIntent().getStringExtra("notification");
         body = getIntent().getStringExtra("receivedResult");
         message = getIntent().getStringExtra("message");
+        UpdateMessage();
+
+        Picasso.with(ChatRoomActivity.this).load(Constants.BASE_URL + user_image).placeholder(R.drawable.no_image).into(ivImage);
+
       /*  myBroadcastReceiver = new MyBroadcastReceiver();
         try {
             if (body != null) {
@@ -89,8 +100,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.tb_toolbar);
         setSupportActionBar(toolbar);
-        sendMessage = (EditText) findViewById(R.id.et_send_message);
-        messengerName = (TextView) findViewById(R.id.tv_chat_msger_name);
+
         messengerName.setText(chatter_name);
 
         chatArray.clear();
@@ -138,10 +148,6 @@ public class ChatRoomActivity extends AppCompatActivity {
                             chatArray.addAll(response.body().getData().getChat_details());
 
 
-
-
-
-
                             aChatRoomAdapter = new ChatRoomAdapter(ChatRoomActivity.this, chatArray);
                             LinearLayoutManager popularGigsLayoutManager
                                     = new LinearLayoutManager(ChatRoomActivity.this, LinearLayoutManager.VERTICAL, false);
@@ -168,7 +174,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     public static void scrollToBottom() {
         if (aChatRoomAdapter != null) {
             aChatRoomAdapter.notifyDataSetChanged();
-            if (aChatRoomAdapter.getItemCount() > 1){
+            if (aChatRoomAdapter.getItemCount() > 1) {
 //                recyclerViewChatRoom.setTranscriptMode(AbsListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
                 recyclerViewChatRoom.getLayoutManager().scrollToPosition(aChatRoomAdapter.getItemCount() - 1);
             }
@@ -242,17 +248,52 @@ public class ChatRoomActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(myBroadcastReceiver);
+        if (myBroadcastReceiver != null) {
+            unregisterReceiver(myBroadcastReceiver);
+        }
+
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(myBroadcastReceiver);
+        if (myBroadcastReceiver != null) {
+            unregisterReceiver(myBroadcastReceiver);
+        }
     }
 
 
-    public class MyBroadcastReceiver extends BroadcastReceiver {
+    public void UpdateMessage() {
+        myBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String result = intent.getStringExtra(MyApplication.EXTRA_KEY_UPDATE);
+                String body = intent.getStringExtra(MyApplication.MESSAGE);
+                if (!result.isEmpty()) {
+
+                    try {
+                        JSONObject mJSONObject = new JSONObject(result);
+                        POSTChatHistory.Chat_detail mChat_detail = new POSTChatHistory.Chat_detail();
+                        mChat_detail.setChat_from(mJSONObject.get("from_user_id").toString());
+                        mChat_detail.setChat_to(mJSONObject.get("to_user_id").toString());
+                        mChat_detail.setChat_time(mJSONObject.get("chat_utc_time").toString());
+                        mChat_detail.setContent(body);
+                        aChatRoomAdapter.addData(mChat_detail);
+                        aChatRoomAdapter.notifyDataSetChanged();
+                        scrollToBottom();
+                        Log.i("TAG JSONRESULT ---->", mJSONObject.toString());
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        };
+    }
+
+
+   /* public class MyBroadcastReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -278,7 +319,7 @@ public class ChatRoomActivity extends AppCompatActivity {
 
             }
         }
-    }
+    }*/
 
 
     @Override

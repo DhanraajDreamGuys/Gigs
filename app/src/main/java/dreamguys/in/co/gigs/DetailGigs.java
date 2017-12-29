@@ -33,6 +33,7 @@ import dreamguys.in.co.gigs.Model.GETProfession;
 import dreamguys.in.co.gigs.Model.POSTAddFav;
 import dreamguys.in.co.gigs.Model.POSTDetailGig;
 import dreamguys.in.co.gigs.Model.POSTRemoveFav;
+import dreamguys.in.co.gigs.Model.POSTVisitGig;
 import dreamguys.in.co.gigs.adapter.DetailGigsReviewAdapter;
 import dreamguys.in.co.gigs.adapter.HorizontalRecommendedGigsAdapter;
 import dreamguys.in.co.gigs.network.ApiClient;
@@ -52,13 +53,14 @@ import retrofit2.Response;
 
 public class DetailGigs extends AppCompatActivity implements View.OnClickListener {
 
-    TextView toolTitle, username, gigsTitle, userprofession, gigsDesc, gigsNos, gigsCountry, gigsUserCount, gigsSpeaks;
+    TextView toolTitle, username, gigsTitle, userprofession, gigsDesc, gigsNos, gigsCountry, gigsUserCount, gigsSpeaks, gigsReviews;
     Toolbar toolbar;
     String gigs_title = "", gigs_id = "";
     ImageView mGigsImages, profileUserImage, inputDescShow, inputDescHide, inputGigsFav;
     Button orderNow;
     CustomProgressDialog mCustomProgressDialog;
     HashMap<String, String> postGigDetails = new HashMap<String, String>();
+    HashMap<String, String> postVisitGigs = new HashMap<String, String>();
     Gson gson;
     private GETProfession[] getProfession;
     private RecyclerView horizontalRecommendedGigs;
@@ -78,6 +80,8 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
     TextView inputCost, inputSuperFastCost, inputSimilarGigs;
     String gigsUserId = "", deliveryDays = "";
 
+    private Boolean isFav;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,21 +93,58 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
         gigs_title = getIntent().getStringExtra(Constants.GIGS_TITLE);
         initLayouts();
         getProfession = gson.fromJson(SessionHandler.getInstance().get(DetailGigs.this, Constants.PROFESSION), GETProfession[].class);
-
+        postGigDetails.put("gig_id", gigs_id);
+        postVisitGigs.put("gig_id", gigs_id);
         if (NetworkChangeReceiver.isConnected()) {
             mCustomProgressDialog.showDialog();
             if (SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID) != null) {
+                postVisitGigs.put("user_id",SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID));
                 postGigDetails.put("userid", SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID));
+                postVisitGigs();
             } else {
                 postGigDetails.put("userid", "");
             }
-            postGigDetails.put("gig_id", gigs_id);
-
             getDetailGig();
+
         } else {
             Utils.toastMessage(DetailGigs.this, getString(R.string.err_internet_connection));
         }
+
+
+        inputGigsFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postDetails.put("user_id", SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID));
+                if (isFav) {
+                    removeFavAPI();
+                    isFav = false;
+                } else {
+                    isFav = true;
+                    addFavAPI();
+                }
+            }
+        });
     }
+
+    private void postVisitGigs() {
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        apiInterface.postVisitedGigs(postVisitGigs).enqueue(new Callback<POSTVisitGig>() {
+            @Override
+            public void onResponse(Call<POSTVisitGig> call, Response<POSTVisitGig> response) {
+                if (response.body().getCode().equals(200)) {
+                    Log.d("TAG", response.body().getMessage());
+                } else {
+                    Log.d("TAG", response.body().getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<POSTVisitGig> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     private void getDetailGig() {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -180,6 +221,7 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
         });
     }
 
+
     @SuppressLint("ResourceType")
     private void sellerLogin(final Response<POSTDetailGig> response) {
         for (int i = 0; i < response.body().getData().size(); i++) {
@@ -194,26 +236,15 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
                 } else {
                     inputGigsFav.setVisibility(View.VISIBLE);
                     if (response.body().getData().get(i).getGigs_details().getFavourite().equalsIgnoreCase("1")) {
+                        isFav = true;
                         inputGigsFav.setImageResource(R.drawable.ic_favorite_filled_24dp);
-                        inputGigsFav.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                postDetails.put("gig_id", response.body().getData().get(position).getGigs_details().getId());
-                                postDetails.put("user_id", SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID));
-                                removeFavAPI();
-                            }
-                        });
+                        postDetails.put("gig_id", response.body().getData().get(position).getGigs_details().getId());
 
                     } else {
+                        isFav = false;
+                        postDetails.put("gig_id", response.body().getData().get(position).getGigs_details().getId());
                         inputGigsFav.setImageResource(R.drawable.ic_favorite_border_purple_24dp);
-                        inputGigsFav.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                postDetails.put("gig_id", response.body().getData().get(position).getGigs_details().getId());
-                                postDetails.put("user_id", SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID));
-                                addFavAPI();
-                            }
-                        });
+
                     }
                 }
             } else {
@@ -245,16 +276,22 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
             }
 
 
-
-
-
             if (response.body().getData().get(i).getGigs_details().getExtra_gigs().size() > 0) {
                 GigsExtras.setVisibility(View.VISIBLE);
+
+
                 for (int j = 0; j < response.body().getData().get(i).getGigs_details().getExtra_gigs().size(); j++) {
                     View checkBoxView = getLayoutInflater().inflate(R.layout.checkbox_view_extras, null);
                     inputGigsExtras.addView(checkBoxView);
                     inputCheckBox = (CheckBox) checkBoxView.findViewById(R.id.cb_extras);
                     inputCost = (TextView) checkBoxView.findViewById(R.id.cost);
+
+                    if (SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID) != null) {
+                        if (SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID).equalsIgnoreCase(gigsUserId)) {
+                            inputCheckBox.setButtonDrawable(null);
+                        }
+                    }
+
                     inputCheckBox.setText(response.body().getData().get(i).getGigs_details().getExtra_gigs().get(j).getExtra_gigs());
                     inputCost.setText("For $" + response.body().getData().get(i).getGigs_details().getExtra_gigs().get(j).getExtra_gigs_amount() + " in " +
                             response.body().getData().get(i).getGigs_details().getExtra_gigs().get(j).getExtra_gigs_delivery() + " day");
@@ -287,7 +324,7 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
 
 
                 }
-            }else{
+            } else {
                 inputGigsExtras.setVisibility(View.GONE);
                 GigsExtras.setVisibility(View.GONE);
             }
@@ -303,28 +340,39 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
             } else {
                 inputGigsSuperFastExtras.setVisibility(View.VISIBLE);
                 GigsExtras.setVisibility(View.VISIBLE);
+
+                if (SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID) != null) {
+                    if (SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID).equalsIgnoreCase(gigsUserId)) {
+                        inputSuperFastCheckBox.setButtonDrawable(null);
+                    }
+                }
+
                 inputSuperFastCheckBox.setText(response.body().getData().get(i).getGigs_details().getSuper_fast_delivery_desc());
                 final int finalI1 = i;
                 inputSuperFastCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                        if (checked) {
+                        if (SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID) != null) {
+                            if (!SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID).equalsIgnoreCase(gigsUserId)) {
+                                if (checked) {
+                                    sum = sum + Integer.parseInt(response.body().getData().get(finalI1).getGigs_details().getSuper_fast_charges());
+                                    SUPERFAST_CHARGES = response.body().getData().get(finalI1).getGigs_details().getSuper_fast_charges();
+                                    SUPERFAST_DAYS = response.body().getData().get(finalI1).getGigs_details().getSuper_fast_days();
+                                    SUPERFAST_DESC = response.body().getData().get(finalI1).getGigs_details().getSuper_fast_delivery_desc();
+                                    orderNow.setText("Order for $" + sum);
+                                } else {
+                                    sum = sum - Integer.parseInt(response.body().getData().get(finalI1).getGigs_details().getSuper_fast_charges());
+                                    SUPERFAST_CHARGES = "";
+                                    SUPERFAST_DAYS = "";
+                                    SUPERFAST_DESC = "";
 
-                            sum = sum + Integer.parseInt(response.body().getData().get(finalI1).getGigs_details().getSuper_fast_charges());
-                            SUPERFAST_CHARGES = response.body().getData().get(finalI1).getGigs_details().getSuper_fast_charges();
-                            SUPERFAST_DAYS = response.body().getData().get(finalI1).getGigs_details().getSuper_fast_days();
-                            SUPERFAST_DESC = response.body().getData().get(finalI1).getGigs_details().getSuper_fast_delivery_desc();
-                            orderNow.setText("Order for $" + sum);
+                                    orderNow.setText("Order for $" + sum);
 
+                                }
+                            }
 
                         } else {
-                            sum = sum - Integer.parseInt(response.body().getData().get(finalI1).getGigs_details().getSuper_fast_charges());
-                            SUPERFAST_CHARGES = "";
-                            SUPERFAST_DAYS = "";
-                            SUPERFAST_DESC = "";
-
-                            orderNow.setText("Order for $" + sum);
-
+                            Toast.makeText(DetailGigs.this, "You need to login to add extras for the gigs....", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -342,6 +390,7 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
             }
 */
             if (response.body().getData().get(i).getReviews().size() > 0) {
+                Constants.reviewList = response.body().getData().get(i).getReviews();
                 detailGigsReviewAdapter = new DetailGigsReviewAdapter(DetailGigs.this, response.body().getData().get(i).getReviews());
                 mDetailGigsReview.setAdapter(detailGigsReviewAdapter);
                 Utils.getListViewSize(mDetailGigsReview);
@@ -406,6 +455,7 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
         inputGigsUserSpeaks = (LinearLayout) findViewById(R.id.ll_gigs_user_speaks);
         inputGigsUserProfile = (LinearLayout) findViewById(R.id.ll_gigs_user_profile);
         inputGigsFav = (ImageView) findViewById(R.id.AD_iv_fav);
+        gigsReviews = (TextView) findViewById(R.id.tv_review_gigs_more);
 
 
         LinearLayoutManager recentPopularGigsLayoutManager
@@ -416,6 +466,7 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
         inputDescShow.setOnClickListener(this);
         inputSimilarGigs.setOnClickListener(this);
         inputGigsUserProfile.setOnClickListener(this);
+        gigsReviews.setOnClickListener(this);
     }
 
     public void goToBuy(View view) {
@@ -443,6 +494,7 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
             Intent CallEditGigs = new Intent(DetailGigs.this, Login.class);
             CallEditGigs.putExtra(Constants.GIGS_ID, gigs_id);
             startActivity(CallEditGigs);
+
         }
 
     }
@@ -472,8 +524,21 @@ public class DetailGigs extends AppCompatActivity implements View.OnClickListene
             Intent CallGigsList = new Intent(DetailGigs.this, GigsLists.class);
             startActivity(CallGigsList);
         } else if (view.getId() == R.id.ll_gigs_user_profile) {
-            Intent callUserProfile = new Intent(DetailGigs.this, DetailGigsUserInformation.class);
-            callUserProfile.putExtra(Constants.GIGS_ID, gigs_title);
+
+            if (SessionHandler.getInstance().get(DetailGigs.this, Constants.USER_ID) != null) {
+                Intent callUserProfile = new Intent(DetailGigs.this, DetailGigsUserInformation.class);
+                callUserProfile.putExtra(Constants.GIGS_ID, gigs_title);
+                callUserProfile.putExtra(Constants.GIGS_ID, gigs_id);
+                startActivity(callUserProfile);
+            } else {
+                Intent CallEditGigs = new Intent(DetailGigs.this, Login.class);
+                startActivity(CallEditGigs);
+            }
+
+
+        } else if (view.getId() == R.id.tv_review_gigs_more) {
+            Intent callUserProfile = new Intent(DetailGigs.this, UserReviews.class);
+            callUserProfile.putExtra(Constants.GIGS_ID, gigs_id);
             startActivity(callUserProfile);
         }
     }

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -93,6 +94,8 @@ public class SellFragment extends Fragment {
     private HashMap<String, String> postCategoryDetails = new HashMap<String, String>();
     List<AddExtraGigs> arrAddExtrasGigs = new ArrayList<AddExtraGigs>();
     Handler mHandler;
+    LinearLayout LnrChildLayout;
+    CheckBox mCheckBox;
 
 
     public SellFragment() {
@@ -151,6 +154,7 @@ public class SellFragment extends Fragment {
         llMoreGigs = (LinearLayout) sellViewLayout.findViewById(R.id.ll_extras);
         spinCategory = (Spinner) sellViewLayout.findViewById(R.id.spinner_category);
         spinSubCategory = (Spinner) sellViewLayout.findViewById(R.id.spinner_sub_category);
+        mCheckBox = (CheckBox) sellViewLayout.findViewById(R.id.cb_agree_conditions);
 
         if (NetworkChangeReceiver.isConnected()) {
             mCustomProgressDialog.showDialog();
@@ -170,16 +174,7 @@ public class SellFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() != 0) {
-                    handleFastExtrasFocus(true);
-                    fastExtras = "yes";
-                } else {
-                    handleFastExtrasFocus(false);
-                    fastExtras = "no";
-                    gigsFastextras.setText("");
-                    gigsFastextrasCost.setText("");
-                    gigsFastextrasDay.setText("");
-                }
+
             }
 
             @Override
@@ -192,11 +187,29 @@ public class SellFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
 
-
+                if (!s.toString().isEmpty()) {
+                    if (s.length() != 0) {
+                        handleFastExtrasFocus(true);
+                        fastExtras = "yes";
+                        gigsFastextrasDay.setFilters(new InputFilter[]{new InputFilterMinMax("1", s.toString())});
+                    } else {
+                        handleFastExtrasFocus(false);
+                        fastExtras = "no";
+                        gigsFastextras.setText("");
+                        gigsFastextrasCost.setText("");
+                        gigsFastextrasDay.setText("");
+                    }
+                } else {
+                    handleFastExtrasFocus(false);
+                    fastExtras = "no";
+                    gigsFastextras.setText("");
+                    gigsFastextrasCost.setText("");
+                    gigsFastextrasDay.setText("");
+                }
             }
         });
 
-        gigsFastextrasDay.addTextChangedListener(new TextWatcher() {
+       /* gigsFastextrasDay.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void afterTextChanged(Editable s) {
@@ -214,63 +227,69 @@ public class SellFragment extends Fragment {
                                       int before, int count) {
                 gigsFastextrasDay.setFilters(new InputFilter[]{new InputFilterMinMax("1", gigsDeliverDay.getText().toString())});
             }
-        });
+        });*/
 
 
         addMoreGigs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (count <= 9) {
-                    LayoutInflater mInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    final LinearLayout LnrChildLayout = (LinearLayout) mInflater
-                            .inflate(R.layout.activity_add_more_items, null);
-                    LnrChildLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT));
-                    llMoreGigs.addView(LnrChildLayout);
-                    closeMoreExtras = (ImageView) LnrChildLayout.findViewById(R.id.iv_close);
-                    extrasTitle = (EditText) LnrChildLayout.findViewById(R.id.input_sub_extras);
-                    extrasCost = (EditText) LnrChildLayout.findViewById(R.id.input_sub_extras_cost);
-                    extrasDay = (EditText) LnrChildLayout.findViewById(R.id.input_sub_extras_day);
-                    doneExtras = (ImageView) LnrChildLayout.findViewById(R.id.iv_done);
+                if (llMoreGigs.indexOfChild(LnrChildLayout) <= 8) {
+                    if (count <= 9) {
+                        LayoutInflater mInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        LnrChildLayout = (LinearLayout) mInflater
+                                .inflate(R.layout.activity_add_more_items, null);
+                        LnrChildLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT));
+                        llMoreGigs.addView(LnrChildLayout);
+                        closeMoreExtras = (ImageView) LnrChildLayout.findViewById(R.id.iv_close);
+                        extrasTitle = (EditText) LnrChildLayout.findViewById(R.id.input_sub_extras);
+                        extrasCost = (EditText) LnrChildLayout.findViewById(R.id.input_sub_extras_cost);
+                        extrasDay = (EditText) LnrChildLayout.findViewById(R.id.input_sub_extras_day);
+                        doneExtras = (ImageView) LnrChildLayout.findViewById(R.id.iv_done);
 
-                    doneExtras.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (LnrChildLayout != null) {
-                                if (!extrasDay.getText().toString().isEmpty() &&
-                                        !extrasTitle.getText().toString().isEmpty() &&
-                                        !extrasCost.getText().toString().isEmpty()) {
-                                    mPOSTExtraGigs = new POSTExtraGigs();
-                                    mPOSTExtraGigs.setExtra_gigs(extrasTitle.getText().toString());
-                                    mPOSTExtraGigs.setExtra_gigs_amount(extrasCost.getText().toString());
-                                    mPOSTExtraGigs.setExtra_gigs_delivery(extrasDay.getText().toString());
-                                    count = llMoreGigs.indexOfChild(LnrChildLayout);
-                                    mPOSTExtraGigs.setPosition(count);
-                                    LnrChildLayout.setTag(count);
-                                    arrExtrasGigs.add(count, mPOSTExtraGigs);
-                                    closeMoreExtras.setVisibility(View.VISIBLE);
-                                    doneExtras.setVisibility(View.GONE);
+                        doneExtras.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (LnrChildLayout != null) {
+                                    if (!extrasDay.getText().toString().isEmpty() &&
+                                            !extrasTitle.getText().toString().isEmpty() &&
+                                            !extrasCost.getText().toString().isEmpty()) {
+                                        mPOSTExtraGigs = new POSTExtraGigs();
+                                        mPOSTExtraGigs.setExtra_gigs(extrasTitle.getText().toString());
+                                        mPOSTExtraGigs.setExtra_gigs_amount(extrasCost.getText().toString());
+                                        mPOSTExtraGigs.setExtra_gigs_delivery(extrasDay.getText().toString());
+                                        count = llMoreGigs.indexOfChild(LnrChildLayout);
+                                        mPOSTExtraGigs.setPosition(count);
+                                        LnrChildLayout.setTag(count);
+                                        arrExtrasGigs.add(count, mPOSTExtraGigs);
+                                        closeMoreExtras.setVisibility(View.VISIBLE);
+                                        doneExtras.setVisibility(View.GONE);
+                                    }
                                 }
                             }
-                        }
-                    });
-                    closeMoreExtras.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            int pos = Integer.parseInt(LnrChildLayout.getTag().toString());
-                            for (int i = 0; i < arrExtrasGigs.size(); i++) {
-                                if (arrExtrasGigs.get(i).getPosition() == pos) {
-                                    arrExtrasGigs.remove(i);
-                                    llMoreGigs.removeViewAt(i);
+                        });
+                        closeMoreExtras.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                int pos = Integer.parseInt(LnrChildLayout.getTag().toString());
+                                for (int i = 0; i < arrExtrasGigs.size(); i++) {
+                                    if (arrExtrasGigs.get(i).getPosition() == pos) {
+                                        arrExtrasGigs.remove(i);
+                                        llMoreGigs.removeViewAt(i);
+                                    }
                                 }
+                                addMoreGigs.setVisibility(View.VISIBLE);
+                                count--;
                             }
-                            addMoreGigs.setVisibility(View.VISIBLE);
-                            count--;
-                        }
-                    });
+                        });
+                    }
                 } else {
-                    addMoreGigs.setVisibility(View.GONE);
+                    /*addMoreGigs.setVisibility(View.GONE);*/
+                    Toast.makeText(getActivity(), "Limit exceeded", Toast.LENGTH_SHORT).show();
+                    addMoreGigs.setClickable(false);
+
+
                     closeMoreExtras.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -290,28 +309,34 @@ public class SellFragment extends Fragment {
             public void onClick(View v) {
                 if (titleGigs.getText().toString().isEmpty()) {
                     titleGigs.setError(getString(R.string.err_gigs_title));
+                    titleGigs.requestFocus();
                     return;
                 }
 
                 if (gigsDeliverDay.getText().toString().isEmpty()) {
                     gigsDeliverDay.setError(getString(R.string.err_gigs_delivery_day));
+                    gigsDeliverDay.requestFocus();
                     return;
                 }
                 if (gigsCosts.getText().toString().isEmpty()) {
                     gigsCosts.setError(getString(R.string.err_gigs_costs));
+                    gigsCosts.requestFocus();
                     return;
                 }
                 if (gigsDesc.getText().toString().isEmpty()) {
                     gigsDesc.setError(getString(R.string.err_gigs_desc));
+                    gigsDesc.requestFocus();
                     return;
                 }
                 if (gigsDesc.getText().toString().isEmpty()) {
                     gigsDesc.setError(getString(R.string.err_gigs_desc));
+                    gigsDesc.requestFocus();
                     return;
                 }
 
                 if (gigsRequirement.getText().toString().isEmpty()) {
                     gigsRequirement.setError(getString(R.string.err_gigs_require));
+                    gigsRequirement.requestFocus();
                     return;
                 }
 
@@ -324,6 +349,10 @@ public class SellFragment extends Fragment {
                     fastExtras = "Yes";
                 }
 
+                if (!mCheckBox.isChecked()) {
+                    Toast.makeText(getActivity(), "Please accept the terms & conditions", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (NetworkChangeReceiver.isConnected()) {
                     mCustomProgressDialog.showDialog();
@@ -354,7 +383,9 @@ public class SellFragment extends Fragment {
                     }
 
                     String jsonString = mGson.toJson(arrAddExtrasGigs);
+                    Log.i("EXTRAS------> ", jsonString);
                     postgigsDetails.put("extra_gigs", jsonString);
+                    postgigsDetails.put("time_zone", SessionHandler.getInstance().get(getActivity(), Constants.TIMEZONE_ID));
 
                     creategigs();
                 } else {
@@ -365,6 +396,10 @@ public class SellFragment extends Fragment {
 
 
         return sellViewLayout;
+    }
+
+    public void termsOfConditions(View view) {
+        Toast.makeText(getActivity(), "Terms and conditions..", Toast.LENGTH_SHORT).show();
     }
 
     private void getCategoryList() {

@@ -21,6 +21,7 @@ import dreamguys.in.co.gigs.Model.POSTDetailGig;
 import dreamguys.in.co.gigs.Model.POSTEditGigs;
 import dreamguys.in.co.gigs.Model.POSTFavGigs;
 import dreamguys.in.co.gigs.Model.POSTForgotPassword;
+import dreamguys.in.co.gigs.Model.POSTGigsReview;
 import dreamguys.in.co.gigs.Model.POSTLastVisitedGigs;
 import dreamguys.in.co.gigs.Model.POSTLeaveFeedback;
 import dreamguys.in.co.gigs.Model.POSTLogin;
@@ -31,16 +32,22 @@ import dreamguys.in.co.gigs.Model.POSTPaypalSettings;
 import dreamguys.in.co.gigs.Model.POSTPurchaseSeeFedBck;
 import dreamguys.in.co.gigs.Model.POSTRegister;
 import dreamguys.in.co.gigs.Model.POSTRemoveFav;
+import dreamguys.in.co.gigs.Model.POSTSearchGigs;
 import dreamguys.in.co.gigs.Model.POSTSellerReviews;
 import dreamguys.in.co.gigs.Model.POSTSubCategory;
 import dreamguys.in.co.gigs.Model.POSTUserChat;
 import dreamguys.in.co.gigs.Model.POSTViewProfile;
+import dreamguys.in.co.gigs.Model.POSTVisitGig;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -51,9 +58,17 @@ public interface ApiInterface {
     @GET("user/state/{stateid}")
     Call<List<GETState>> getState(@Path(value = "stateid", encoded = true) String stateid);
 
-    @FormUrlEncoded
+    @Multipart
     @POST("user/registration")
-    Call<POSTRegister> postRegister(@FieldMap HashMap<String, String> registerData);
+    Call<POSTRegister> postRegister(@Part("email") RequestBody email,
+                                    @Part("username") RequestBody username,
+                                    @Part("password") RequestBody password,
+                                    @Part("state") RequestBody state,
+                                    @Part("country") RequestBody country,
+                                    @Part("fullname") RequestBody fullname,
+                                    @Part("user_timezone") RequestBody user_timezone,
+                                    @Part MultipartBody.Part image
+    );
 
     @FormUrlEncoded
     @POST("user/login")
@@ -77,9 +92,20 @@ public interface ApiInterface {
     @POST("user/paypal_setting")
     Call<POSTPaypalSettings> postPaypalSettings(@FieldMap HashMap<String, String> paypalsettings);
 
-    @FormUrlEncoded
+    @Multipart
     @POST("user/profile")
-    Call<POSTPaypalSettings> postUpdateProfile(@FieldMap HashMap<String, String> updateProfile);
+    Call<POSTPaypalSettings> postUpdateProfile(@Part("user_id") RequestBody user_id,
+                                               @Part("user_contact") RequestBody user_contact,
+                                               @Part("user_zip") RequestBody user_zip,
+                                               @Part("user_city") RequestBody user_city,
+                                               @Part("user_addr") RequestBody user_addr,
+                                               @Part("user_desc") RequestBody user_desc,
+                                               @Part("country_id") RequestBody country_id,
+                                               @Part("state_id") RequestBody state_id,
+                                               @Part("profession") RequestBody profession,
+                                               @Part("user_name") RequestBody user_name,
+                                               @Part("language_tags") RequestBody language_tags,
+                                               @Part MultipartBody.Part image);
 
     @GET("gigs/categories")
     Call<GETCategory> getCategories();
@@ -97,6 +123,15 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("gigs/seller_reviews")
     Call<POSTSellerReviews> getSellerReviews(@FieldMap HashMap<String, String> sellerReviews);
+
+    @FormUrlEncoded
+    @POST("gigs/search_gig")
+    Call<POSTSearchGigs> postSearchGigs(@FieldMap HashMap<String, String> searchGigs);
+
+
+    @FormUrlEncoded
+    @POST("gigs/seller_buyer_review")
+    Call<POSTGigsReview> getGigsReviews(@FieldMap HashMap<String, String> sellerReviews);
 
     @FormUrlEncoded
     @POST("user/profile_details")
@@ -133,6 +168,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("gigs/last_visited_gigs")
     Call<POSTLastVisitedGigs> getLastVisitedGigs(@FieldMap HashMap<String, String> updateProfile);
+
+    @FormUrlEncoded
+    @POST("gigs/last_visit")
+    Call<POSTVisitGig> postVisitedGigs(@FieldMap HashMap<String, String> visitedGigs);
 
     @FormUrlEncoded
     @POST("gigs/edit_gigs")

@@ -20,11 +20,14 @@
     <string name="font_bold">NotoSans_Bold</string>
     <string name="err_msg_name">Enter Name</string>
     <string name="err_msg_phone">Only numbers Allowed</string>
+    <string name="err_msg_phone_no">Enter Phone no</string>
+    <string name="err_msg_zipcode">Enter zipcode</string>
     <string name="err_msg_city">Should contain only letters</string>
     <string name="err_msg_email">Enter the vaild email address</string>
     <string name="err_msg_password">Enter password</string>
     <string name="err_msg_password_length">Password should contain minimum 8 characters</string>
     <string name="err_msg_uname">Enter username</string>
+    <string name="err_msg_city_name">Enter city</string>
     <string name="err_msg_rpassword">Enter repeat password</string>
     <string name="err_msg_cpassword">Enter correct password</string>
     <string name="text_agree">By signing up, I agree to The Gigs</string>
@@ -40,7 +43,8 @@
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>
-
+    <string name="search">Search</string>
+    <string name="search_gigs">Search Gigs</string>
     <string name="signup_register_now">Register now</string>
     <string name="text_forgot_password">Forgot password?</string>
     <string name="hint_username_email">Username / Email</string>
@@ -99,7 +103,7 @@
     <string name="txt_add_more_items"><u>Add more items</u></string>
     <string name="txt_earn_money">Earn extra money - offer optional add-on services to the Buyer</string>
     <string name="txt_super_fast_delivery">Super fast Delivery</string>
-    <string name="text_create_gigs">Create Gigs</string>
+    <string name="text_create_gigs">Create a Gig</string>
     <string name="err_extras_isempty">Enter extras name</string>
     <string name="err_extrascost_isempty">Enter extras cost</string>
     <string name="err_extrasday_isempty">Enter extras delivery day</string>
@@ -134,6 +138,9 @@
     <string name="title_cart">Cart</string>
     <string name="text_buy_now">Buy now</string>
     <string name="com_stripe_publishable_key">pk_test_1cGC9JfAkF6GhaegLd2XI2xl</string>
+    <string name="termsandconditions"><![CDATA[T & C]]></string>
+    <string name="my_gigs">My Gigs</string>
+
     <string-array name="settings_data">
         <item>Change password</item>
         <item>Edit Profile</item>

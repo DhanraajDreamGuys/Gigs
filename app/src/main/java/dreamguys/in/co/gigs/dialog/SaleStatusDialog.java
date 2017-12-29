@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -58,8 +59,11 @@ public class SaleStatusDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
+        /*getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));*/
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         if (VIEW_NO == 1) {
             saleStatusDialg = inflater.inflate(R.layout.dialog_sale_cancel, null);
+
             textStatus = (TextView) saleStatusDialg.findViewById(R.id.tv_reason);
             btnAcceptStus = (Button) saleStatusDialg.findViewById(R.id.btn_accept_status);
 
@@ -112,7 +116,7 @@ public class SaleStatusDialog extends DialogFragment {
             });
         } else {
             saleStatusDialg = inflater.inflate(R.layout.dialog_sale_status, null);
-            saleStatusDialg.setPadding(10, 10, 10, 10);
+            /*saleStatusDialg.setPadding(10, 10, 10, 10);*/
             mSpinner = (Spinner) saleStatusDialg.findViewById(R.id.spin_order_status);
             btnOrdrStus = (Button) saleStatusDialg.findViewById(R.id.btn_select_ordr_status);
             final String[] orderStatusArr = getResources().getStringArray(R.array.order_status);

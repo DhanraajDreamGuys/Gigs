@@ -22,9 +22,9 @@ import org.json.JSONException;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
-import dreamguys.in.co.gigs.MainActivity;
 import dreamguys.in.co.gigs.Model.POSTDetailGig;
 import dreamguys.in.co.gigs.Model.POSTPaymentSuccess;
+import dreamguys.in.co.gigs.MyActivity;
 import dreamguys.in.co.gigs.R;
 import dreamguys.in.co.gigs.network.ApiClient;
 import dreamguys.in.co.gigs.network.ApiInterface;
@@ -199,8 +199,8 @@ public class PaypalAct extends AppCompatActivity {
                         mCustomProgressDialog.dismiss();
                         if (response.body() != null) {
                             if (response.body().getCode().equals(200)) {
-                                Toast.makeText(PaypalAct.this, "Thank you for your order....", Toast.LENGTH_SHORT).show();
-                                Intent callHome = new Intent(PaypalAct.this, MainActivity.class);
+                                Toast.makeText(PaypalAct.this, "View order....", Toast.LENGTH_SHORT).show();
+                                Intent callHome = new Intent(PaypalAct.this, MyActivity.class);
                                 callHome.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(callHome);
                                 finish();

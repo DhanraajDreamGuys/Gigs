@@ -47,6 +47,7 @@ public class MyPurchaseAdapter extends RecyclerView.Adapter<MyPurchaseAdapter.My
     private CustomProgressDialog mCustomProgressDialog;
 
 
+
     public MyPurchaseAdapter(Context mContext, List<POSTMyActivity.My_purchase> data, FragmentManager fm) {
         this.mContext = mContext;
         this.data = data;
@@ -68,7 +69,7 @@ public class MyPurchaseAdapter extends RecyclerView.Adapter<MyPurchaseAdapter.My
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         Picasso.with(mContext).load(Constants.BASE_URL + data.get(position).getGig_image_thumb()).into(holder.gigsImages);
         holder.sellerName.setText("Seller Name: " + data.get(position).getSeller_name());
-        holder.gigsDDate.setText("Delivery Date: " + data.get(position).getDelivery_date());
+        holder.gigsDDate.setText("Delivery Date: " + data.get(position).getDelivery());
         holder.gigsOrderId.setText("Order Id: " + data.get(position).getOrder_id());
         holder.gigsTitle.setText(data.get(position).getTitle());
         holder.postedDate.setText(data.get(position).getCreated_date());
@@ -82,7 +83,7 @@ public class MyPurchaseAdapter extends RecyclerView.Adapter<MyPurchaseAdapter.My
                 @Override
                 public void onClick(View v) {
                     if (mPurchaseSeeFeedbackDialog != null) {
-                        mPurchaseSeeFeedbackDialog.setData(data.get(position),1, null);
+                        mPurchaseSeeFeedbackDialog.setData(data.get(position), 1, null);
                         mPurchaseSeeFeedbackDialog.show(fm, "see feedback");
                     }
                 }
@@ -140,6 +141,8 @@ public class MyPurchaseAdapter extends RecyclerView.Adapter<MyPurchaseAdapter.My
 
 
     }
+
+
 
     @Override
     public int getItemCount() {

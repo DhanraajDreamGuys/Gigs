@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,7 +29,6 @@ import dreamguys.in.co.gigs.Model.GETProfession;
 import dreamguys.in.co.gigs.Model.POSTDetailGig;
 import dreamguys.in.co.gigs.dialog.ChatCommentBox;
 import dreamguys.in.co.gigs.fragment.DetailReviewGigsFragment;
-import dreamguys.in.co.gigs.fragment.DetailsSellerGigsFragment;
 import dreamguys.in.co.gigs.network.ApiClient;
 import dreamguys.in.co.gigs.network.ApiInterface;
 import dreamguys.in.co.gigs.receiver.NetworkChangeReceiver;
@@ -71,7 +71,7 @@ public class DetailGigsUserInformation extends AppCompatActivity {
         initLayouts();
         gson = new Gson();
         getProfession = gson.fromJson(SessionHandler.getInstance().get(DetailGigsUserInformation.this, Constants.PROFESSION), GETProfession[].class);
-        gigs_id = SessionHandler.getInstance().get(DetailGigsUserInformation.this, Constants.GIGS_ID);
+        gigs_id = getIntent().getStringExtra(Constants.GIGS_ID);
         viewPager = (CustomViewPager) findViewById(R.id.CustomviewPager);
         setUpViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -111,7 +111,7 @@ public class DetailGigsUserInformation extends AppCompatActivity {
     private void setUpViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new DetailReviewGigsFragment(DetailGigsUserInformation.this), "Reviews");
-        adapter.addFragment(new DetailsSellerGigsFragment(DetailGigsUserInformation.this), "My Gigs");
+        /*adapter.addFragment(new MyGigs(DetailGigsUserInformation.this), "My Gigs");*/
         viewPager.setAdapter(adapter);
 
     }
@@ -224,8 +224,17 @@ public class DetailGigsUserInformation extends AppCompatActivity {
         profileUserImage = (ImageView) findViewById(R.id.iv_profile_image);
         LinearLayoutManager recentPopularGigsLayoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+    }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

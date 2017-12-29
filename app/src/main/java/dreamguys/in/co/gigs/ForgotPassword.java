@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -39,6 +41,7 @@ public class ForgotPassword extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
         mCustomProgressDialog = new CustomProgressDialog(this);
         initLayouts();
+        editEmail.addTextChangedListener(new ForgetPasswordTextWatcher(editEmail));
     }
 
     private void initLayouts() {
@@ -105,6 +108,37 @@ public class ForgotPassword extends AppCompatActivity {
         return true;
     }
 
+    private class ForgetPasswordTextWatcher implements TextWatcher {
+
+        private View view;
+
+        private ForgetPasswordTextWatcher(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (view.getId() == R.id.input_email) {
+                validateEmail();
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (view.getId() == R.id.input_email) {
+                if (editEmail.getText().toString().isEmpty()) {
+                    textInputLayoutEmail.setErrorEnabled(false);
+                    textInputLayoutEmail.requestFocus();
+                    textInputLayoutEmail.setError(null);
+                }
+            }
+        }
+    }
 
     private void requestFocus(View view) {
         if (view.requestFocus()) {

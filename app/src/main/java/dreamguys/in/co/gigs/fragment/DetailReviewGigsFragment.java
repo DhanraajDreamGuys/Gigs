@@ -87,6 +87,8 @@ public class DetailReviewGigsFragment extends Fragment {
                     mDetailGigsReview.setAdapter(sellerReviewsGigsAdpater);
                     mCustomProgressDialog.dismiss();
                     Utils.getListViewSize(mDetailGigsReview);
+                }else {
+                    mCustomProgressDialog.dismiss();
                 }
             }
 

@@ -3,35 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:gravity="center"
+    android:layout_height="@dimen/_150sdp"
+    android:minHeight="@dimen/_150sdp"
     android:minWidth="@dimen/_500sdp"
-    android:minHeight="@dimen/_200sdp"
     android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="@dimen/_10sdp"
+        android:text="Select Status"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/_12sdp"
+        android:visibility="gone" />
+
 
     <Spinner
         android:id="@+id/spin_order_status"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:entries="@array/order_status"
         android:padding="@dimen/_10sdp"
-        tools:layout_editor_absoluteX="122dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:textAlignment="center" />
 
     <dreamguys.in.co.gigs.utils.CustomButton
         android:id="@+id/btn_select_ordr_status"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_35sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/button_rectangular_shape"
-        android:ems="8"
-        android:gravity="center"
         android:text="Update"
-        android:layout_marginTop="@dimen/_20sdp"
         android:textColor="@android:color/white"
-        app:fontName="@string/font_regular"
-        tools:layout_editor_absoluteX="114dp"
-        tools:layout_editor_absoluteY="71dp" />
+        app:fontName="@string/font_regular" />
 
 
 </LinearLayout>

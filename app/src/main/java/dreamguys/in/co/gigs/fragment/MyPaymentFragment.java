@@ -1,20 +1,28 @@
 package dreamguys.in.co.gigs.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import dreamguys.in.co.gigs.Model.POSTMyActivity;
+import dreamguys.in.co.gigs.MyApplication;
 import dreamguys.in.co.gigs.R;
 import dreamguys.in.co.gigs.adapter.MyPaymentAdapter;
 import dreamguys.in.co.gigs.utils.Constants;
@@ -43,6 +51,8 @@ public class MyPaymentFragment extends Fragment {
     //    SwipeRefreshLayout mSwipeRefreshLayout;
     MyPaymentAdapter aMyPaymentAdapter;
     TextView currentAmount, mNoDataFound;
+    private BroadcastReceiver myBroadcastReceiver;
+    Context mContext;
 
 
     public MyPaymentFragment() {
@@ -84,6 +94,12 @@ public class MyPaymentFragment extends Fragment {
         currentAmount = (TextView) myPaymentViews.findViewById(R.id.tv_current_bal);
         mNoDataFound = (TextView) myPaymentViews.findViewById(R.id.no_data_found);
 
+        PaymentUpdate();
+        IntentFilter intentFilter = new IntentFilter(MyApplication.ACTION_MyUpdate);
+        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
+        mContext.registerReceiver(myBroadcastReceiver, intentFilter);
+
+
         if (getArguments() != null) {
             List<POSTMyActivity.My_payment> my_payment_array = getArguments().getParcelableArrayList(Constants.MY_PAYMENTARRAY_KEY);
             if (my_payment_array != null) {
@@ -92,7 +108,7 @@ public class MyPaymentFragment extends Fragment {
                     recyclerViewPurchase.setVisibility(View.VISIBLE);
                     currentAmount.setVisibility(View.VISIBLE);
                     currentAmount.setText("Available Funds: " + Constants.DOLLAR_SIGN + getArguments().getString(Constants.WALLET_BALANCE));
-                    aMyPaymentAdapter = new MyPaymentAdapter(getActivity(), my_payment_array, getChildFragmentManager());
+                    aMyPaymentAdapter = new MyPaymentAdapter(getActivity(), my_payment_array, currentAmount, getArguments().getString(Constants.WALLET_BALANCE), getChildFragmentManager());
                     LinearLayoutManager horizontalLayoutManagaer
                             = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
                     recyclerViewPurchase.setLayoutManager(horizontalLayoutManagaer);
@@ -126,6 +142,7 @@ public class MyPaymentFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mContext = context;
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         }
@@ -134,8 +151,49 @@ public class MyPaymentFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        if (myBroadcastReceiver != null) {
+            mContext.unregisterReceiver(myBroadcastReceiver);
+        }
         mListener = null;
     }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (myBroadcastReceiver != null) {
+            mContext.unregisterReceiver(myBroadcastReceiver);
+        }
+    }
+
+    public void PaymentUpdate() {
+        myBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String result = intent.getStringExtra(MyApplication.EXTRA_KEY_UPDATE);
+                if (!result.isEmpty()) {
+
+                    try {
+                        JSONObject mJSONObject = new JSONObject(result);
+                        currentAmount.setText("Available Funds: " + mJSONObject.getString("balance"));
+                        Log.i("TAG JSONRESULT ---->", mJSONObject.toString());
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        };
+    }
+
+    /*@Override
+    public void onResume() {
+        super.onResume();
+        IntentFilter intentFilter = new IntentFilter(MyApplication.ACTION_MyUpdate);
+        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
+        getActivity().registerReceiver(myBroadcastReceiver, intentFilter);
+    }*/
 
     /**
      * This interfaces must be implemented by activities that contain this

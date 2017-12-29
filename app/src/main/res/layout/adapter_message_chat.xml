@@ -6,13 +6,14 @@
     android:layout_margin="@dimen/_3sdp"
     android:orientation="horizontal">
 
-    <ImageView
+
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_message_profile_img"
         android:layout_width="@dimen/_48sdp"
         android:layout_height="@dimen/_48sdp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/no_image" />
+        android:src="@drawable/no_image"
+        app:civ_border_color="@android:color/transparent"
+        app:civ_border_width="2dp" />
 
 
     <LinearLayout
@@ -50,9 +51,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginLeft="@dimen/_5sdp"
         android:layout_marginRight="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginStart="@dimen/_5sdp"
         android:gravity="right"
         android:singleLine="true"

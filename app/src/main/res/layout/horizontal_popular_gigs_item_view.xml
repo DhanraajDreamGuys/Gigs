@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
+
         <FrameLayout
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
@@ -67,6 +69,7 @@
             android:layout_marginLeft="@dimen/_2sdp"
             android:layout_marginRight="@dimen/_2sdp"
             android:layout_marginStart="@dimen/_2sdp"
+            android:gravity="center"
             android:singleLine="true"
             android:text="asdas"
             android:textSize="@dimen/_10sdp"
@@ -77,6 +80,7 @@
             style="@style/Base.Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginEnd="@dimen/_2sdp"
             android:layout_marginLeft="@dimen/_2sdp"
             android:layout_marginRight="@dimen/_2sdp"
@@ -91,6 +95,7 @@
             android:layout_marginLeft="@dimen/_2sdp"
             android:layout_marginRight="@dimen/_2sdp"
             android:layout_marginStart="@dimen/_2sdp"
+            android:gravity="center"
             android:paddingBottom="@dimen/_5sdp"
             android:singleLine="true"
             android:text="(20)"
@@ -101,6 +106,8 @@
             android:id="@+id/rl_location"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginEnd="@dimen/_2sdp"
             android:layout_marginLeft="@dimen/_2sdp"
             android:layout_marginRight="@dimen/_2sdp"
@@ -115,10 +122,11 @@
 
             <dreamguys.in.co.gigs.utils.CustomTextView
                 android:id="@+id/tv_loc"
-                android:layout_width="@dimen/_100sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_15sdp"
+                android:gravity="center"
                 android:singleLine="true"
                 android:textSize="@dimen/_8sdp"
                 app:fontName="@string/font_regular" />

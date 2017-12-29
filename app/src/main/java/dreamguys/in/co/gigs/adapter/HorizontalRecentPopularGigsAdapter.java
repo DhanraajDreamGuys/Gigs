@@ -64,36 +64,37 @@ public class HorizontalRecentPopularGigsAdapter extends RecyclerView.Adapter<Hor
         holder.gigsReviewCount.setText("(" + recent_popular_gigs_list.get(position).getGig_usercount() + ")");
         if (SessionHandler.getInstance().get(mContext, Constants.USER_ID) != null) {
             if (recent_popular_gigs_list.get(position).getFavourite().equalsIgnoreCase("1")){
+                holder.isSelected = true;
                 holder.favGigsIcons.setVisibility(View.VISIBLE);
                 holder.favGigsIcons.setImageResource(R.drawable.ic_favorite_filled_24dp);
-                holder.favGigsIcons.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (NetworkChangeReceiver.isConnected()) {
-                            postDetails.put("gig_id", recent_popular_gigs_list.get(position).getId());
-                            postDetails.put("user_id", SessionHandler.getInstance().get(mContext, Constants.USER_ID));
-                            removeFavAPI(holder, position);
-                        } else {
-                            Utils.toastMessage(mContext, mContext.getString(R.string.err_internet_connection));
-                        }
-                    }
-                });
+
             }else{
+                holder.isSelected = false;
                 holder.favGigsIcons.setVisibility(View.VISIBLE);
                 holder.favGigsIcons.setImageResource(R.drawable.ic_favorite_border_purple_24dp);
-                holder.favGigsIcons.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (NetworkChangeReceiver.isConnected()) {
-                            postDetails.put("gig_id", recent_popular_gigs_list.get(position).getId());
-                            postDetails.put("user_id", SessionHandler.getInstance().get(mContext, Constants.USER_ID));
-                            addFavAPI(holder, position);
-                        } else {
-                            Utils.toastMessage(mContext, mContext.getString(R.string.err_internet_connection));
-                        }
-                    }
-                });
             }
+
+
+            holder.favGigsIcons.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (NetworkChangeReceiver.isConnected()) {
+                        postDetails.put("gig_id", recent_popular_gigs_list.get(position).getId());
+                        postDetails.put("user_id", SessionHandler.getInstance().get(mContext, Constants.USER_ID));
+                        if (holder.isSelected) {
+                            holder.isSelected = false;
+                            removeFavAPI(holder, position);
+                        } else {
+                            holder.isSelected = true;
+                            addFavAPI(holder, position);
+                        }
+                    } else {
+                        Utils.toastMessage(mContext, mContext.getString(R.string.err_internet_connection));
+                    }
+                }
+            });
+
+
         } else {
             holder.favGigsIcons.setVisibility(View.GONE);
         }
@@ -154,6 +155,7 @@ public class HorizontalRecentPopularGigsAdapter extends RecyclerView.Adapter<Hor
         final ImageView gigsImages;
         RatingBar gigsRating;
         final ImageView favGigsIcons;
+        Boolean isSelected;
 
         MyViewHolder(View itemView) {
             super(itemView);

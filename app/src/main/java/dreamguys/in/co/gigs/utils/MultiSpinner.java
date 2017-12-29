@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import java.util.List;
+
+import dreamguys.in.co.gigs.UpdateProfile;
 
 public class MultiSpinner extends Spinner implements
         DialogInterface.OnMultiChoiceClickListener, DialogInterface.OnCancelListener {
@@ -50,11 +53,15 @@ public class MultiSpinner extends Spinner implements
         String spinnerText;
         if (someUnselected) {
             spinnerText = spinnerBuffer.toString();
-            if (spinnerText.length() > 2){
-                spinnerText = spinnerText.substring(0, spinnerText.length() - 2);
-            }else{
-                spinnerText = "Select Language";
+            if (spinnerText.isEmpty()) {
+                defaultText = "";
+                spinnerText = "Select Language  ";
+                UpdateProfile.stringBuilder.setLength(0);
             }
+            if (spinnerText.length() > 2) {
+                spinnerText = spinnerText.substring(0, spinnerText.length() - 2);
+            }
+
         } else {
             spinnerText = defaultText;
         }
@@ -107,13 +114,25 @@ public class MultiSpinner extends Spinner implements
         this.defaultText = allText;
         this.listener = listener;
 
-        String[] selectedData = allText.split(",");
-        selected = new boolean[items.size()];
-        for (int i = 0; i < items.size(); i++) {
-            for (int j = 0; j < selectedData.length; j++) {
-                if (selectedData[j].contains(items.get(i)))
-                    selected[i] = true;
+        if (UpdateProfile.stringBuilder.length() < 0) {
+            Log.d("TAG", "SPINNER IS EMPTY");
+            defaultText = "";
+        } else {
+            if (!defaultText.equalsIgnoreCase(",")) {
+                String[] selectedData = defaultText.split(",");
+                selected = new boolean[items.size()];
+                for (int i = 0; i < items.size(); i++) {
+                    for (int j = 0; j < selectedData.length; j++) {
+                        if (selectedData[j].contains(items.get(i)))
+                            selected[i] = true;
+                    }
+                }
+            } else {
+                defaultText = "";
+                Log.d("TAG", "No data");
             }
+
+
         }
 
         // all text on the spinner

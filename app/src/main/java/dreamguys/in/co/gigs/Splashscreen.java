@@ -28,7 +28,7 @@ import retrofit2.Response;
  * Created by Prasad on 10/24/2017.
  */
 
-public class Splashscreen extends AppCompatActivity implements NetworkChangeReceiver.ConnectivityReceiverListener{
+public class Splashscreen extends AppCompatActivity implements NetworkChangeReceiver.ConnectivityReceiverListener {
     private Gson gson;
     private AVLoadingIndicatorView aviLoadingView;
 

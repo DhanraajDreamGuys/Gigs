@@ -111,8 +111,8 @@
                     android:layout_gravity="center"
                     android:background="@drawable/button_rectangular_shape"
                     android:gravity="center"
-                    android:padding="@dimen/_5sdp"
                     android:onClick="openChatCommentBox"
+                    android:padding="@dimen/_5sdp"
                     android:text="@string/contact"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/_10sdp"
@@ -276,11 +276,13 @@
                     android:id="@+id/tabs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="left"
                     android:background="@color/colorGrey100"
                     android:descendantFocusability="blocksDescendants"
                     app:tabGravity="fill"
-                    app:tabMode="fixed"
-                    app:tabSelectedTextColor="@color/colorAppTheme"
+                    app:tabIndicatorColor="@android:color/transparent"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="@color/colorGrey700"
                     app:tabTextColor="@color/colorGrey700" />
 
 

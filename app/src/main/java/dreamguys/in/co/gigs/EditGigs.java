@@ -118,7 +118,7 @@ public class EditGigs extends AppCompatActivity {
             mCustomProgressDialog.showDialog();
             if (SessionHandler.getInstance().get(this, Constants.USER_ID) != null) {
                 postGigsDetails.put("user_id", SessionHandler.getInstance().get(this, Constants.USER_ID));
-                postGigsDetails.put("gig_id", "1");
+                postGigsDetails.put("gig_id", gigs_id);
             }
 
             getEditGigs();

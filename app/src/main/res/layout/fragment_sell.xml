@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_16sdp"
         android:layout_marginRight="@dimen/_16sdp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp">
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_title_gigs"
@@ -255,18 +256,32 @@
                 app:fontName="@string/font_regular" />
         </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="@dimen/_10sdp">
 
-            <dreamguys.in.co.gigs.utils.CustomCheckedTextView
-                android:id="@+id/ctv"
-                android:layout_width="match_parent"
+            <CheckBox
+                android:id="@+id/cb_agree_conditions"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fontName="@string/font_regular"
-                android:text="@string/txt_terms_conditions" />
-        </LinearLayout>
+                android:gravity="center_vertical"
+                android:text="@string/txt_terms_conditions"
+                android:textSize="@dimen/_10sdp" />
+
+            <dreamguys.in.co.gigs.utils.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_toRightOf="@+id/cb_agree_conditions"
+                android:onClick="termsOfConditions"
+                android:text=" T &amp; C"
+                android:textColor="@color/colorAppTheme"
+                android:textSize="@dimen/_10sdp"
+                app:fontName="@string/font_bold"
+                tools:ignore="HardcodedText" />
+        </RelativeLayout>
 
         <dreamguys.in.co.gigs.utils.CustomButton
             android:id="@+id/button_create_gigs"

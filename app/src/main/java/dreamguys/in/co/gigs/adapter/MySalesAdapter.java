@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -72,7 +73,7 @@ public class MySalesAdapter extends RecyclerView.Adapter<MySalesAdapter.MyViewHo
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         Picasso.with(mContext).load(Constants.BASE_URL + data.get(position).getGig_image_thumb()).into(holder.gigsImages);
         holder.sellerName.setText("Seller Name: " + data.get(position).getBuyer_name());
-        holder.gigsDDate.setText("Delivery Date: " + data.get(position).getDelivery_date());
+        holder.gigsDDate.setText("Delivery Date: " + data.get(position).getDelivery());
         holder.gigsOrderId.setText("Order Id: " + data.get(position).getOrder_id());
         holder.gigsTitle.setText(data.get(position).getTitle());
         holder.postedDate.setText(data.get(position).getCreated_date());
@@ -122,11 +123,16 @@ public class MySalesAdapter extends RecyclerView.Adapter<MySalesAdapter.MyViewHo
             holder.cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mSaleStatusDialog != null) {
-                        VIEW_NO = 1;
-                        mSaleStatusDialog.passOrderStatusData(data.get(position), VIEW_NO);
-                        mSaleStatusDialog.show(fm, "show_order_status");
+                    if(!data.get(position).getOrder_cancel().equalsIgnoreCase("-")){
+                        if (mSaleStatusDialog != null) {
+                            VIEW_NO = 1;
+                            mSaleStatusDialog.passOrderStatusData(data.get(position), VIEW_NO);
+                            mSaleStatusDialog.show(fm, "show_order_status");
+                        }
+                    }else{
+                        Toast.makeText(mContext, "Not available", Toast.LENGTH_SHORT).show();
                     }
+
                 }
             });
         }

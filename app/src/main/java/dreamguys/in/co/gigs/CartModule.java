@@ -114,12 +114,8 @@ public class CartModule extends AppCompatActivity {
                         buyingGigsHere();
                         break;
                     case "Stripe":
-                        Intent intentPayAct = new Intent(CartModule.this, StripePay.class);
-                        intentPayAct.putExtra("total_cost", totalCost);
-                        intentPayAct.putExtra("title", mGigs_details.getTitle());
-                        intentPayAct.putExtra("id", mGigs_details.getId());
-                        intentPayAct.putExtra("bundle", mGigs_details);
-                        startActivity(intentPayAct);
+                        buyingGigsHere();
+
                         break;
                 }
             } else {
@@ -143,7 +139,7 @@ public class CartModule extends AppCompatActivity {
             postGigsDetails.put("total_delivery_days", "");
         }
         postGigsDetails.put("options", extraGigs);
-
+        postGigsDetails.put("source", paymentType.toLowerCase());
 
         if (NetworkChangeReceiver.isConnected()) {
             mCustomProgressDialog.showDialog();
@@ -151,17 +147,30 @@ public class CartModule extends AppCompatActivity {
             apiInterface.postBuyingGigsdetails(postGigsDetails).enqueue(new Callback<POSTBuyNow>() {
                 @Override
                 public void onResponse(Call<POSTBuyNow> call, Response<POSTBuyNow> response) {
-                    mCustomProgressDialog.dismiss();
-                    if (response.body().getCode().equals(200)) {
 
-                        Intent intentPayAct = new Intent(CartModule.this, PaypalAct.class);
-                        intentPayAct.putExtra("total_cost", totalCost);
-                        intentPayAct.putExtra("title", mGigs_details.getTitle());
-                        intentPayAct.putExtra("id", mGigs_details.getId());
-                        intentPayAct.putExtra("bundle", mGigs_details);
-                        startActivity(intentPayAct);
 
+                    switch (paymentType) {
+                        case "Paypal":
+                            if (response.body().getCode().equals(200)) {
+                                Intent intentPayAct = new Intent(CartModule.this, PaypalAct.class);
+                                intentPayAct.putExtra("total_cost", totalCost);
+                                intentPayAct.putExtra("title", mGigs_details.getTitle());
+                                intentPayAct.putExtra("id", response.body().getData().getGig_order_id().toString());
+                                intentPayAct.putExtra("bundle", mGigs_details);
+                                startActivity(intentPayAct);
+                            }
+                            break;
+                        case "Stripe":
+                            Intent intentPayAct = new Intent(CartModule.this, StripePay.class);
+                            intentPayAct.putExtra("total_cost", totalCost);
+                            intentPayAct.putExtra("title", mGigs_details.getTitle());
+                            intentPayAct.putExtra("id", response.body().getData().getGig_order_id().toString());
+                            intentPayAct.putExtra("bundle", mGigs_details);
+                            startActivity(intentPayAct);
+                            break;
                     }
+
+                    mCustomProgressDialog.dismiss();
                 }
 
                 @Override

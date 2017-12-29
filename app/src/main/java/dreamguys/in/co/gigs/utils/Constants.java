@@ -3,6 +3,7 @@ package dreamguys.in.co.gigs.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import dreamguys.in.co.gigs.Model.POSTDetailGig;
 import dreamguys.in.co.gigs.Model.POSTMyActivity;
 
 /**
@@ -29,6 +30,7 @@ public class Constants {
     public static List<POSTMyActivity.My_purchase> My_Purchase_Array = new ArrayList<POSTMyActivity.My_purchase>();
     public static List<POSTMyActivity.My_sale> My_Sales_Array;
     public static List<POSTMyActivity.My_payment> My_Payment_Array;
+    public static List<POSTDetailGig.Review> reviewList;
     public static String MY_PURARRAY_KEY = "MY_PURARRAY_KEY";
     public static String MY_SALEARRAY_KEY = "MY_SALEARRAY_KEY";
     public static String MY_PAYMENTARRAY_KEY = "MY_PAYMENTARRAY_KEY";
@@ -38,6 +40,6 @@ public class Constants {
     public static String SUPERFAST_DAYS = "SUPERFAST_DAYS";
     public static String SUPERFAST_DELIVERY_DESC = "SUPERFAST_DELIVERY_DESC";
     public static String passwordMatch = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])[^\\s]{8,15}$";
-    public static String cityMatch = "^(?=.*[a-z])(?=.*[A-Z])[^\\s]{8,15}$";
-    public static String numberMatch="^[0-9]+$";
+    public static String cityMatch = "[a-zA-Z]+";
+    public static String numberMatch = "^[0-9]+$";
 }

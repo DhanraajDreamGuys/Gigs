@@ -33,11 +33,22 @@
         android:id="@+id/gv_gigs_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:horizontalSpacing="@dimen/_1sdp"
         android:numColumns="2"
-        android:gravity="center"
         android:scrollbars="none"
         android:verticalSpacing="@dimen/_1sdp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    <dreamguys.in.co.gigs.utils.CustomTextView
+        android:id="@+id/tv_nogigs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No Gigs Available"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
 </android.support.design.widget.CoordinatorLayout>

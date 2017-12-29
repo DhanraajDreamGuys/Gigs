@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,6 +60,10 @@ public class Login extends AppCompatActivity {
 
         mCustomProgressDialog = new CustomProgressDialog(this);
         initLayouts();
+
+        editEmail.addTextChangedListener(new LoginTextWatcher(editEmail));
+        editPassword.addTextChangedListener(new LoginTextWatcher(editPassword));
+
     }
 
     private void initLayouts() {
@@ -133,6 +139,48 @@ public class Login extends AppCompatActivity {
         }
     }
 
+
+    private class LoginTextWatcher implements TextWatcher {
+
+        private View view;
+
+        private LoginTextWatcher(View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (view.getId() == R.id.input_username) {
+                validateUsername();
+            } else if (view.getId() == R.id.input_password) {
+                validatePassword();
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (view.getId() == R.id.input_username) {
+                if (editEmail.getText().toString().isEmpty()) {
+                    textInputLayoutEmail.setErrorEnabled(false);
+                    textInputLayoutEmail.requestFocus();
+                    textInputLayoutEmail.setError(null);
+                }
+            } else if (view.getId() == R.id.input_password) {
+                if (editPassword.getText().toString().isEmpty()) {
+                    textInputLayoutPassword.setErrorEnabled(false);
+                    textInputLayoutPassword.requestFocus();
+                    textInputLayoutPassword.setError(null);
+                }
+            }
+        }
+    }
+
+
     private void postLogin() {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         apiInterface.postLogin(loginData).enqueue(new Callback<POSTLogin>() {
@@ -189,6 +237,13 @@ public class Login extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     private void clearFocus() {

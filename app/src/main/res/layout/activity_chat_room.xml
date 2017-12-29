@@ -16,11 +16,20 @@
             android:background="@color/colorAppTheme"
             app:navigationIcon="@drawable/ic_arrow_back_white_24dp">
 
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/input_profile_picture"
+                android:layout_width="@dimen/_36sdp"
+                android:layout_height="@dimen/_36sdp"
+                android:src="@drawable/no_image"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="2dp" />
+
             <dreamguys.in.co.gigs.utils.CustomTextView
                 android:id="@+id/tv_chat_msger_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
                 android:text="@string/title_register"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/_16sdp"
@@ -67,9 +76,9 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_weight="0.5"
                 android:background="@null"
+                android:hint="Enter message"
                 android:textSize="@dimen/_12sdp"
-                app:fontName="@string/font_regular"
-                android:hint="Enter message" />
+                app:fontName="@string/font_regular" />
 
             <dreamguys.in.co.gigs.utils.CustomButton
                 android:layout_width="wrap_content"
@@ -81,10 +90,10 @@
                 android:background="@drawable/button_rectangular_green_shape"
                 android:gravity="center"
                 android:onClick="sendMesageBtn"
-                android:textSize="@dimen/_12sdp"
                 android:text="Send"
-                app:fontName="@string/font_regular"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12sdp"
+                app:fontName="@string/font_regular" />
 
         </LinearLayout>
     </LinearLayout>

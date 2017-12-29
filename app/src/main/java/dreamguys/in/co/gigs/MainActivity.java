@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-
         // if savedInstanceState is null we do some cleanup
         if (savedInstanceState != null) {
             // cleanup any existing fragments in case we are in detailed mode
@@ -213,9 +212,23 @@ public class MainActivity extends AppCompatActivity
                 startActivity(new Intent(this, Login.class));
                 finish();
             }
-        }else if (id == R.id.nav_myactivity) {
+        } else if (id == R.id.nav_search) {
+            if (SessionHandler.getInstance().get(this, Constants.USER_ID) != null) {
+                startActivity(new Intent(this, Search_Gigs.class));
+            } else {
+                startActivity(new Intent(this, Login.class));
+                finish();
+            }
+        } else if (id == R.id.nav_myactivity) {
             if (SessionHandler.getInstance().get(this, Constants.USER_ID) != null) {
                 startActivity(new Intent(this, MyActivity.class));
+            } else {
+                startActivity(new Intent(this, Login.class));
+                finish();
+            }
+        } else if (id == R.id.nav_myGigs) {
+            if (SessionHandler.getInstance().get(this, Constants.USER_ID) != null) {
+                startActivity(new Intent(this, MyGigs.class));
             } else {
                 startActivity(new Intent(this, Login.class));
                 finish();
@@ -350,7 +363,6 @@ public class MainActivity extends AppCompatActivity
         txtChat.setTextColor(getResources().getColor(android.R.color.black));
         ivChat.setBackgroundResource(R.drawable.ic_chat_black_24dp);
     }
-
 
 
 }

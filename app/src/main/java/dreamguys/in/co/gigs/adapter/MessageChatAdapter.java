@@ -21,6 +21,7 @@ import dreamguys.in.co.gigs.ChatRoomActivity;
 import dreamguys.in.co.gigs.Model.POSTMessages;
 import dreamguys.in.co.gigs.R;
 import dreamguys.in.co.gigs.utils.CircleTransform;
+import dreamguys.in.co.gigs.utils.Constants;
 
 /**
  * Created by Prasad on 11/14/2017.
@@ -48,7 +49,7 @@ public class MessageChatAdapter extends RecyclerView.Adapter<MessageChatAdapter.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         if (!details.get(position).getProfile_image().isEmpty())
-            Picasso.with(mContext).load(details.get(position).getProfile_image()).transform(new CircleTransform()).placeholder(R.drawable.no_image).into(holder.imageMessagerPf);
+            Picasso.with(mContext).load(Constants.BASE_URL + details.get(position).getProfile_image()).transform(new CircleTransform()).placeholder(R.drawable.no_image).into(holder.imageMessagerPf);
 
         holder.messangerName.setText(details.get(position).getFirstname());
         holder.messangerMsg.setText(details.get(position).getLast_message());
@@ -88,6 +89,7 @@ public class MessageChatAdapter extends RecyclerView.Adapter<MessageChatAdapter.
                     callChatRoom.putExtra("user_id", details.get(getAdapterPosition()).getUser_id());
                     callChatRoom.putExtra("chat_id", details.get(getAdapterPosition()).getChat_id());
                     callChatRoom.putExtra("chat_name", details.get(getAdapterPosition()).getFirstname());
+                    callChatRoom.putExtra("user_image",details.get(getAdapterPosition()).getProfile_image());
                     mContext.startActivity(callChatRoom);
 
 

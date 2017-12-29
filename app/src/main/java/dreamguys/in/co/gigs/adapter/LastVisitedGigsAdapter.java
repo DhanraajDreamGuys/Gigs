@@ -60,48 +60,49 @@ public class LastVisitedGigsAdapter extends RecyclerView.Adapter<LastVisitedGigs
         holder.gigsAuthor.setText(data.get(position).getFullname());
         holder.gigsRate.setText(Constants.DOLLAR_SIGN + data.get(position).getGig_price());
         holder.gigsLocation.setText(data.get(position).getCountry() + "," + data.get(position).getState_name());
-        Picasso.with(mContext).load(Constants.BASE_URL + data.get(position).getImage()).into(holder.gigsImages);
+        Picasso.with(mContext).load(Constants.BASE_URL + data.get(position).getImage()).placeholder(R.drawable.ic_no_image).into(holder.gigsImages);
         holder.gigsRating.setRating(Float.parseFloat(data.get(position).getGig_rating()));
         holder.gigsReviewCount.setText("(" + data.get(position).getGig_usercount() + ")");
 
 
-
-
         if (SessionHandler.getInstance().get(mContext, Constants.USER_ID) != null) {
-            if (SessionHandler.getInstance().get(mContext, Constants.USER_ID).equalsIgnoreCase(data.get(position).getUser_id())){
+            if (SessionHandler.getInstance().get(mContext, Constants.USER_ID).equalsIgnoreCase(data.get(position).getUser_id())) {
                 holder.favGigsIcons.setVisibility(View.GONE);
-            }else{
+            } else {
                 if (data.get(position).getFavourite().equalsIgnoreCase("1")) {
+                    holder.isSelected = true;
                     holder.favGigsIcons.setVisibility(View.VISIBLE);
                     holder.favGigsIcons.setImageResource(R.drawable.ic_favorite_filled_24dp);
-                    holder.favGigsIcons.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (NetworkChangeReceiver.isConnected()) {
-                                postDetails.put("gig_id", data.get(position).getId());
-                                postDetails.put("user_id", SessionHandler.getInstance().get(mContext, Constants.USER_ID));
-                                removeFavAPI(holder, position);
-                            } else {
-                                Utils.toastMessage(mContext, mContext.getString(R.string.err_internet_connection));
-                            }
-                        }
-                    });
+
                 } else {
+                    holder.isSelected = false;
                     holder.favGigsIcons.setVisibility(View.VISIBLE);
                     holder.favGigsIcons.setImageResource(R.drawable.ic_favorite_border_purple_24dp);
-                    holder.favGigsIcons.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (NetworkChangeReceiver.isConnected()) {
-                                postDetails.put("gig_id", data.get(position).getId());
-                                postDetails.put("user_id", SessionHandler.getInstance().get(mContext, Constants.USER_ID));
-                                addFavAPI(holder, position);
-                            } else {
-                                Utils.toastMessage(mContext, mContext.getString(R.string.err_internet_connection));
-                            }
-                        }
-                    });
                 }
+
+                holder.favGigsIcons.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (NetworkChangeReceiver.isConnected()) {
+                            postDetails.put("gig_id", data.get(position).getId());
+                            postDetails.put("user_id", SessionHandler.getInstance().get(mContext, Constants.USER_ID));
+
+                            if (holder.isSelected) {
+                                holder.isSelected = false;
+                                removeFavAPI(holder, position);
+                            } else {
+                                holder.isSelected = true;
+                                addFavAPI(holder, position);
+                            }
+
+
+                        } else {
+                            Utils.toastMessage(mContext, mContext.getString(R.string.err_internet_connection));
+                        }
+                    }
+                });
+
+
             }
         }
 
@@ -165,6 +166,7 @@ public class LastVisitedGigsAdapter extends RecyclerView.Adapter<LastVisitedGigs
         final ImageView gigsImages;
         RatingBar gigsRating;
         final ImageView favGigsIcons;
+        Boolean isSelected;
 
         MyViewHolder(View itemView) {
             super(itemView);

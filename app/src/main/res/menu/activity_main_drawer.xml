@@ -12,9 +12,18 @@
             android:title="Last visited Gigs" />
 
         <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/ic_view_list_black_24dp"
+            android:title="Search Gigs" />
+
+        <item
             android:id="@+id/nav_myactivity"
             android:icon="@drawable/ic_view_list_black_24dp"
             android:title="My Activity" />
+        <item
+            android:id="@+id/nav_myGigs"
+            android:icon="@drawable/ic_view_list_black_24dp"
+            android:title="My Gigs" />
 
     </group>
 

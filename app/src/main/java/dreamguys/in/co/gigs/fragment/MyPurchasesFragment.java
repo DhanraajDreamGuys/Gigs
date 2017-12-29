@@ -1,20 +1,28 @@
 package dreamguys.in.co.gigs.fragment;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import dreamguys.in.co.gigs.Model.POSTMyActivity;
+import dreamguys.in.co.gigs.MyApplication;
 import dreamguys.in.co.gigs.R;
 import dreamguys.in.co.gigs.adapter.MyPurchaseAdapter;
 import dreamguys.in.co.gigs.dialog.PurchaseCancelDialogFragment;
@@ -51,6 +59,7 @@ public class MyPurchasesFragment extends Fragment implements UpdateRequestData {
 //    SwipeRefreshLayout mSwipeRefreshLayout;
 
     MyPurchasesFragment mMyPurchasesFragment;
+
 
     CustomProgressDialog mCustomProgressDialog;
     TextView mNoDataFound;
@@ -152,6 +161,7 @@ public class MyPurchasesFragment extends Fragment implements UpdateRequestData {
     @Override
     public void onDetach() {
         super.onDetach();
+
         mListener = null;
     }
 
@@ -166,6 +176,8 @@ public class MyPurchasesFragment extends Fragment implements UpdateRequestData {
             }
         }
     }
+
+
 
     /**
      * This interfaces must be implemented by activities that contain this

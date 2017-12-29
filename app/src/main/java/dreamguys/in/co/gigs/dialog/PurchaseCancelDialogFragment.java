@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -53,7 +54,8 @@ public class PurchaseCancelDialogFragment extends DialogFragment implements Canc
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.cancel_dialog_fragment, container,
                 false);
-        getDialog().setTitle("Cancel your Order");
+        getDialog().setTitle("");
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getDialog().setCancelable(false);
 
         /*ViewGroup.LayoutParams params = getDialog().getWindow().getAttributes();

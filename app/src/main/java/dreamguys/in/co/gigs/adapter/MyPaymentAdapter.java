@@ -50,13 +50,18 @@ public class MyPaymentAdapter extends RecyclerView.Adapter<MyPaymentAdapter.MyVi
     private HashMap<String, String> postGigsdetails;
     private CustomProgressDialog mCustomProgressDialog;
     private SaleStatusDialog mSaleStatusDialog;
+    private TextView currentAmount;
     private int VIEW_NO = 0;
+    String WalletBalance;
+    int value;
 
 
-    public MyPaymentAdapter(Context mContext, List<POSTMyActivity.My_payment> data, FragmentManager fm) {
+    public MyPaymentAdapter(Context mContext, List<POSTMyActivity.My_payment> data, TextView currentAmount, String WalletBalance, FragmentManager fm) {
         this.mContext = mContext;
         this.data = data;
+        this.currentAmount = currentAmount;
         this.fm = fm;
+        this.WalletBalance = WalletBalance;
         postGigsdetails = new HashMap<String, String>();
         mCustomProgressDialog = new CustomProgressDialog(mContext);
         mPurchaseCancelDialogFragment = new PurchaseCancelDialogFragment(mContext);
@@ -80,17 +85,22 @@ public class MyPaymentAdapter extends RecyclerView.Adapter<MyPaymentAdapter.MyVi
         holder.gigsTitle.setText(data.get(position).getTitle());
         holder.postedDate.setText(data.get(position).getCreated_date());
         holder.gigsRate.setText(Constants.DOLLAR_SIGN + data.get(position).getAmount());
-
+        /*value = Integer.parseInt(WalletBalance) - Integer.parseInt(data.get(position).getAmount());*/
         if (data.get(position).getWithdraw_val().equalsIgnoreCase("1")) {
             holder.withdrawAmout.setText(data.get(position).getWithdraw_message());
+            /*currentAmount.setText(String.valueOf(value));*/
+
         } else if (data.get(position).getWithdraw_val().equalsIgnoreCase("2")) {
             holder.withdrawAmout.setText(data.get(position).getWithdraw_message());
+            /*currentAmount.setText("Available Funds: " + String.valueOf(value));*/
+            /*currentAmount.setText("Available Funds: " + Constants.DOLLAR_SIGN + "0");*/
         } else {
             holder.withdrawAmout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     postGigsdetails.put("order_id", data.get(position).getOrder_id());
+
 
                     if (NetworkChangeReceiver.isConnected()) {
                         mCustomProgressDialog.showDialog();
@@ -99,6 +109,11 @@ public class MyPaymentAdapter extends RecyclerView.Adapter<MyPaymentAdapter.MyVi
                             @Override
                             public void onResponse(Call<POSTAcceptBuyRequest> call, Response<POSTAcceptBuyRequest> response) {
                                 if (response.body().getCode().equals(200)) {
+                                    /*holder.withdrawAmout.setText("Request Sent");*/
+                                    data.get(position).setWithdraw_val("1");
+                                    data.get(position).setWithdraw_message("Request Send");
+                                    notifyItemChanged(position);
+
                                     Utils.toastMessage(mContext, response.body().getMessage());
                                 } else {
                                     Utils.toastMessage(mContext, response.body().getMessage());
